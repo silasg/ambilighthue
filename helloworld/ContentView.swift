@@ -11,9 +11,8 @@ struct ContentView: View {
   let items = ["Off", "On"]
   @State private var selection: String? = nil
 
-  let call = NetworkCall()
+    @StateObject private var call = NetworkCall()
     
-  @State private var log = "(no log)"
     
   var body: some View {
     VStack(spacing: 20) {
@@ -24,7 +23,6 @@ struct ContentView: View {
           self.selection = self.items[index]
             // todo: hier den http post machen, spaeter wegen get gucken
             call.postRequest(powerState: self.items[index])
-            log = call.log
         }) {
           HStack {
             Text(self.items[index])
@@ -37,10 +35,7 @@ struct ContentView: View {
         .padding()
       }
 
-      if let selection = selection {
-        Text("Selected Item: \(selection)")
-      }
-        Text(log)
+      Text(call.log)
     }
     .padding()
   }
