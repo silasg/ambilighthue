@@ -9,16 +9,57 @@ import Foundation
 
 class NetworkCall : NSObject, ObservableObject, URLSessionDelegate{
     @Published var log = "(no log)"
+   
+    let usr = "REDACTED"
+    let pwd = "REDACTED"
+   
+    
+    
+    public func urlSession(
+            _ session: URLSession,
+          task: URLSessionTask,
+          didReceive challenge: URLAuthenticationChallenge
+    ) async -> (URLSession.AuthChallengeDisposition, URLCredential?) {
+        print("challenged \(task) with \(challenge)")
+        
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodHTTPBasic {
+            return (.useCredential, URLCredential(user: usr, password: pwd, persistence: .forSession))
+        }
+        return (.performDefaultHandling, nil)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+            print("received task challenge")
+        }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didReceiveChallenge challenge: URLAuthenticationChallenge, completionHandler: (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    print("didReceiveAuthenticationChallenge")
+
+    }
+    
     
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        
+        
         if challenge.protectionSpace.host == "TV_IP" {
+            let method = challenge.protectionSpace.authenticationMethod
+            print("auth method \(method)")
             
-            let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-
-                   completionHandler(.useCredential, urlCredential)
+            
+            if method == NSURLAuthenticationMethodHTTPBasic {
+                
+                let urlCredential =  URLCredential(user: usr, password: pwd, persistence: .forSession)
+                return completionHandler(.useCredential, urlCredential)
+            } else if method == NSURLAuthenticationMethodServerTrust {
+                
+                let urlCredential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+                //urlCredential.user = username
+                //urlCredential.password = password
+                return completionHandler(.useCredential, urlCredential)
+            }
             
         } else {
-            completionHandler(.performDefaultHandling, nil)
+           return completionHandler(.performDefaultHandling, nil)
         }
     }
     
@@ -31,30 +72,31 @@ class NetworkCall : NSObject, ObservableObject, URLSessionDelegate{
       
       let url = URL(string: "https://TV_IP:1926/6/HueLamp/power")! // change server url accordingly
       
-        let username = "REDACTED"
-        let password = "REDACTED"
-       
         
    
       //let session = URLSession.shared
-      
-      //let session  = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
-        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+      let sessionConfig = URLSessionConfiguration.default
+        
+       let authData = (usr + ":" + pwd).data(using: .utf8)!.base64EncodedString()
+        print(usr)
+        print(pwd)
+        print(authData)
+        sessionConfig.httpAdditionalHeaders = ["Authorization": "Basic \(authData)"]
+        
+      let session  = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
+       // let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
         
       // now create the URLRequest object using the url object
       var request = URLRequest(url: url)
       request.httpMethod = "POST"
-        
-        
-        let authData = (username + ":" + password).data(using: .utf8)!.base64EncodedString()
-            request.addValue("Basic \(authData)", forHTTPHeaderField: "Authorization")
-        
 
       
       // add headers for the request
     //  request.addValue("application/json", forHTTPHeaderField: "Content-Type") // change as per server requirements
     //  request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
+        request.setValue("application/json", forHTTPHeaderField: "accept")
+               request.setValue("application/json", forHTTPHeaderField: "content-type")
+              
      
       do {
         // convert parameters to Data and assign dictionary to httpBody of request
@@ -82,15 +124,21 @@ class NetworkCall : NSObject, ObservableObject, URLSessionDelegate{
             return
         }
           
-        
+        var res = response as? HTTPURLResponse
+          self.log = "response code is \(res?.statusCode ?? 0)"
+          print(self.log)
         // ensure there is valid response code returned from this HTTP response
-        guard let httpResponse = response as? HTTPURLResponse,
+       /* guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode)
         else {
           print("Invalid Response received from the server")
             self.log = "invalid response"
           return
-        }
+        }*/
+          
+          if let outputStr  = String(data: data!, encoding: String.Encoding.utf8) as String?
+          { self.log = outputStr }
+                   
         
         // ensure there is data returned
         guard let responseData = data else {
