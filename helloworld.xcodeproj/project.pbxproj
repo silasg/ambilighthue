@@ -14,6 +14,7 @@
 		915945AF2C28372E003D2AC0 /* helloworldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* helloworldTests.swift */; };
 		915945B92C28372E003D2AC0 /* helloworldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* helloworldUITests.swift */; };
 		915945BB2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */; };
+		915945C82C28551E003D2AC0 /* NetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* NetworkCall.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		915945B42C28372E003D2AC0 /* helloworldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = helloworldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		915945B82C28372E003D2AC0 /* helloworldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITests.swift; sourceTree = "<group>"; };
 		915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		915945C72C28551E003D2AC0 /* NetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCall.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				9159459D2C28372D003D2AC0 /* helloworldApp.swift */,
 				9159459F2C28372D003D2AC0 /* ContentView.swift */,
+				915945C72C28551E003D2AC0 /* NetworkCall.swift */,
 				915945A12C28372E003D2AC0 /* Assets.xcassets */,
 				915945A32C28372E003D2AC0 /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				915945A02C28372D003D2AC0 /* ContentView.swift in Sources */,
+				915945C82C28551E003D2AC0 /* NetworkCall.swift in Sources */,
 				9159459E2C28372D003D2AC0 /* helloworldApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +426,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"helloworld/Preview Content\"";
+				DEVELOPMENT_TEAM = MPM882X566;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,6 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"helloworld/Preview Content\"";
+				DEVELOPMENT_TEAM = MPM882X566;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
