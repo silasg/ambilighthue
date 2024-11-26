@@ -8,10 +8,10 @@
 import SwiftUI
 
 @main
-struct helloworldApp: App {
+struct ambilightHueApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AmbilightHueControlView()
         }
     }
 }

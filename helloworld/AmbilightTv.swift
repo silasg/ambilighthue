@@ -12,21 +12,29 @@ enum AmbilightHueMode {
     case enabled, disabled
 }
 
-class NetworkCall : ObservableObject{
+class AmbilightTv : ObservableObject{
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
    
-    static let usr = "REDACTED"
-    static let pwd = "REDACTED"
-    let credential = URLCredential(user: usr, password: pwd, persistence: .forSession)
-    let session = Session(serverTrustManager: ServerTrustManager(evaluators: ["TV_IP": DisabledTrustEvaluator()]))
-  
-    init() {
+    var tvIp: String
+    var credential: URLCredential
+    
+ 
+    var session: Session
+
+    
+    init(tvIp: String, username: String, password: String) {
+        self.credential = URLCredential(user: username, password: password, persistence: .forSession)
+        self.tvIp = tvIp
+        let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
+            self.tvIp: DisabledTrustEvaluator()
+            ]
+        self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
         updateState()//todo: move
     }
     
     func updateState() {
-        session.request("https://TV_IP:1926/6/HueLamp/power", method: .get)
+        session.request("https://\(tvIp):1926/6/HueLamp/power", method: .get)
             .authenticate(with: credential)
             .responseString { r in
             switch r.result {
@@ -44,19 +52,19 @@ class NetworkCall : ObservableObject{
             }
     }
     
-    func postRequest(newState: AmbilightHueMode) {
+    func setAmbilightHueMode(newMode: AmbilightHueMode) {
         
-        let powerState = newState == AmbilightHueMode.enabled ? "On" : "Off"
+        let powerState = newMode == AmbilightHueMode.enabled ? "On" : "Off"
         
         let parameters: [String: Any] = ["power": powerState]
         
         
-        session.request("https://TV_IP:1926/6/HueLamp/power", method: .post, 
+        session.request("https://\(tvIp):1926/6/HueLamp/power", method: .post,
                         parameters: parameters, encoding: JSONEncoding.default)
         .authenticate(with: credential).response { response in
             switch response.result {
-            case .success(let value):
-                self.currentState = newState;
+            case .success( _):
+                self.currentState = newMode;
                 self.log =  "ok for \(powerState)"
             case .failure(let error):
                 self.log = error.localizedDescription

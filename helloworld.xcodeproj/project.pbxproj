@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		16FE34CDAC7625CAC48327D3 /* Pods_helloworldTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75BF1258E5ECAA290CEB05A /* Pods_helloworldTests.framework */; };
 		20A09B55D8D40A523FB14B7B /* Pods_helloworld_helloworldUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5780C1CB95AF8B07001B98 /* Pods_helloworld_helloworldUITests.framework */; };
-		9159459E2C28372D003D2AC0 /* helloworldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459D2C28372D003D2AC0 /* helloworldApp.swift */; };
-		915945A02C28372D003D2AC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459F2C28372D003D2AC0 /* ContentView.swift */; };
+		9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */; };
+		915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */; };
 		915945A22C28372E003D2AC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A12C28372E003D2AC0 /* Assets.xcassets */; };
 		915945A52C28372E003D2AC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A42C28372E003D2AC0 /* Preview Assets.xcassets */; };
 		915945AF2C28372E003D2AC0 /* helloworldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* helloworldTests.swift */; };
 		915945B92C28372E003D2AC0 /* helloworldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* helloworldUITests.swift */; };
 		915945BB2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */; };
-		915945C82C28551E003D2AC0 /* NetworkCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* NetworkCall.swift */; };
+		915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* AmbilightTv.swift */; };
 		92C7A6A960A0D7D461260B34 /* Pods_helloworld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123C86C0E39AE89F7584DCDB /* Pods_helloworld.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +43,8 @@
 		809A0A0AFE16B6F41C7F4C7A /* Pods-helloworldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworldTests.release.xcconfig"; path = "Target Support Files/Pods-helloworldTests/Pods-helloworldTests.release.xcconfig"; sourceTree = "<group>"; };
 		8950B71FBD26E8650C5FE7F8 /* Pods-helloworldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworldTests.debug.xcconfig"; path = "Target Support Files/Pods-helloworldTests/Pods-helloworldTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9159459A2C28372D003D2AC0 /* helloworld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = helloworld.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9159459D2C28372D003D2AC0 /* helloworldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldApp.swift; sourceTree = "<group>"; };
-		9159459F2C28372D003D2AC0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilightHueApp.swift; sourceTree = "<group>"; };
+		9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlView.swift; sourceTree = "<group>"; };
 		915945A12C28372E003D2AC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		915945A42C28372E003D2AC0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		915945AA2C28372E003D2AC0 /* helloworldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = helloworldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,7 +52,7 @@
 		915945B42C28372E003D2AC0 /* helloworldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = helloworldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		915945B82C28372E003D2AC0 /* helloworldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITests.swift; sourceTree = "<group>"; };
 		915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		915945C72C28551E003D2AC0 /* NetworkCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCall.swift; sourceTree = "<group>"; };
+		915945C72C28551E003D2AC0 /* AmbilightTv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTv.swift; sourceTree = "<group>"; };
 		91F63C382C2EE2EF009BBBE3 /* todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = todo.md; sourceTree = "<group>"; };
 		B690851163CFF54FA2024FDB /* Pods-helloworld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld.release.xcconfig"; path = "Target Support Files/Pods-helloworld/Pods-helloworld.release.xcconfig"; sourceTree = "<group>"; };
 		DD6AF5FFA470ADD1415E0D28 /* Pods-helloworld-helloworldUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld-helloworldUITests.debug.xcconfig"; path = "Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,9 +125,9 @@
 		9159459C2C28372D003D2AC0 /* helloworld */ = {
 			isa = PBXGroup;
 			children = (
-				9159459D2C28372D003D2AC0 /* helloworldApp.swift */,
-				9159459F2C28372D003D2AC0 /* ContentView.swift */,
-				915945C72C28551E003D2AC0 /* NetworkCall.swift */,
+				9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */,
+				9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */,
+				915945C72C28551E003D2AC0 /* AmbilightTv.swift */,
 				915945A12C28372E003D2AC0 /* Assets.xcassets */,
 				915945A32C28372E003D2AC0 /* Preview Content */,
 			);
@@ -410,9 +410,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915945A02C28372D003D2AC0 /* ContentView.swift in Sources */,
-				915945C82C28551E003D2AC0 /* NetworkCall.swift in Sources */,
-				9159459E2C28372D003D2AC0 /* helloworldApp.swift in Sources */,
+				915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */,
+				915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */,
+				9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
