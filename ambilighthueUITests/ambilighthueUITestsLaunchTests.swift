@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class helloworldUITestsLaunchTests: XCTestCase {
+final class ambilighthueUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

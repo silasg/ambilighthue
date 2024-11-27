@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16FE34CDAC7625CAC48327D3 /* Pods_helloworldTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75BF1258E5ECAA290CEB05A /* Pods_helloworldTests.framework */; };
-		20A09B55D8D40A523FB14B7B /* Pods_helloworld_helloworldUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5780C1CB95AF8B07001B98 /* Pods_helloworld_helloworldUITests.framework */; };
 		9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */; };
 		915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */; };
 		915945A22C28372E003D2AC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A12C28372E003D2AC0 /* Assets.xcassets */; };
 		915945A52C28372E003D2AC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A42C28372E003D2AC0 /* Preview Assets.xcassets */; };
-		915945AF2C28372E003D2AC0 /* helloworldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* helloworldTests.swift */; };
-		915945B92C28372E003D2AC0 /* helloworldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* helloworldUITests.swift */; };
-		915945BB2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */; };
+		915945AF2C28372E003D2AC0 /* ambilighthueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */; };
+		915945B92C28372E003D2AC0 /* ambilighthueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */; };
+		915945BB2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */; };
 		915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* AmbilightTv.swift */; };
-		92C7A6A960A0D7D461260B34 /* Pods_helloworld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 123C86C0E39AE89F7584DCDB /* Pods_helloworld.framework */; };
+		A6D85DCD6C1BDB2B5D2C3612 /* Pods_ambilighthue_ambilighthueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */; };
+		DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */; };
+		FDCA49192DBD7B8AF51F9AA7 /* Pods_ambilighthue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,27 +38,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		097204708A8DEFE2E936FAF1 /* Pods-helloworld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld.debug.xcconfig"; path = "Target Support Files/Pods-helloworld/Pods-helloworld.debug.xcconfig"; sourceTree = "<group>"; };
-		123C86C0E39AE89F7584DCDB /* Pods_helloworld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_helloworld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		809A0A0AFE16B6F41C7F4C7A /* Pods-helloworldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworldTests.release.xcconfig"; path = "Target Support Files/Pods-helloworldTests/Pods-helloworldTests.release.xcconfig"; sourceTree = "<group>"; };
-		8950B71FBD26E8650C5FE7F8 /* Pods-helloworldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworldTests.debug.xcconfig"; path = "Target Support Files/Pods-helloworldTests/Pods-helloworldTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9159459A2C28372D003D2AC0 /* helloworld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = helloworld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue-ambilighthueUITests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests.release.xcconfig"; sourceTree = "<group>"; };
+		680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.debug.xcconfig"; sourceTree = "<group>"; };
+		749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue-ambilighthueUITests.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9159459A2C28372D003D2AC0 /* ambilighthue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambilighthue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilightHueApp.swift; sourceTree = "<group>"; };
 		9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlView.swift; sourceTree = "<group>"; };
 		915945A12C28372E003D2AC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		915945A42C28372E003D2AC0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		915945AA2C28372E003D2AC0 /* helloworldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = helloworldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		915945AE2C28372E003D2AC0 /* helloworldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldTests.swift; sourceTree = "<group>"; };
-		915945B42C28372E003D2AC0 /* helloworldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = helloworldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		915945B82C28372E003D2AC0 /* helloworldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITests.swift; sourceTree = "<group>"; };
-		915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helloworldUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambilighthueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueTests.swift; sourceTree = "<group>"; };
+		915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambilighthueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueUITests.swift; sourceTree = "<group>"; };
+		915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		915945C72C28551E003D2AC0 /* AmbilightTv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTv.swift; sourceTree = "<group>"; };
+		91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.release.xcconfig"; sourceTree = "<group>"; };
 		91F63C382C2EE2EF009BBBE3 /* todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = todo.md; sourceTree = "<group>"; };
-		B690851163CFF54FA2024FDB /* Pods-helloworld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld.release.xcconfig"; path = "Target Support Files/Pods-helloworld/Pods-helloworld.release.xcconfig"; sourceTree = "<group>"; };
-		DD6AF5FFA470ADD1415E0D28 /* Pods-helloworld-helloworldUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld-helloworldUITests.debug.xcconfig"; path = "Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		DFB3178D8762D45F8832086E /* Pods-helloworld-helloworldUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-helloworld-helloworldUITests.release.xcconfig"; path = "Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F75BF1258E5ECAA290CEB05A /* Pods_helloworldTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_helloworldTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE5780C1CB95AF8B07001B98 /* Pods_helloworld_helloworldUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_helloworld_helloworldUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue_ambilighthueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.release.xcconfig"; sourceTree = "<group>"; };
+		F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92C7A6A960A0D7D461260B34 /* Pods_helloworld.framework in Frameworks */,
+				FDCA49192DBD7B8AF51F9AA7 /* Pods_ambilighthue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16FE34CDAC7625CAC48327D3 /* Pods_helloworldTests.framework in Frameworks */,
+				DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,19 +82,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20A09B55D8D40A523FB14B7B /* Pods_helloworld_helloworldUITests.framework in Frameworks */,
+				A6D85DCD6C1BDB2B5D2C3612 /* Pods_ambilighthue_ambilighthueUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		604BB8C5D8A368D36F333728 /* Frameworks */ = {
+		443C90D731F964ADF3E66AEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				123C86C0E39AE89F7584DCDB /* Pods_helloworld.framework */,
-				FE5780C1CB95AF8B07001B98 /* Pods_helloworld_helloworldUITests.framework */,
-				F75BF1258E5ECAA290CEB05A /* Pods_helloworldTests.framework */,
+				886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */,
+				A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */,
+				F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -103,26 +103,26 @@
 			isa = PBXGroup;
 			children = (
 				91F63C382C2EE2EF009BBBE3 /* todo.md */,
-				9159459C2C28372D003D2AC0 /* helloworld */,
-				915945AD2C28372E003D2AC0 /* helloworldTests */,
-				915945B72C28372E003D2AC0 /* helloworldUITests */,
+				9159459C2C28372D003D2AC0 /* ambilighthue */,
+				915945AD2C28372E003D2AC0 /* ambilighthueTests */,
+				915945B72C28372E003D2AC0 /* ambilighthueUITests */,
 				9159459B2C28372D003D2AC0 /* Products */,
 				9F61BEB0E91494741FB46E6C /* Pods */,
-				604BB8C5D8A368D36F333728 /* Frameworks */,
+				443C90D731F964ADF3E66AEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		9159459B2C28372D003D2AC0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9159459A2C28372D003D2AC0 /* helloworld.app */,
-				915945AA2C28372E003D2AC0 /* helloworldTests.xctest */,
-				915945B42C28372E003D2AC0 /* helloworldUITests.xctest */,
+				9159459A2C28372D003D2AC0 /* ambilighthue.app */,
+				915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */,
+				915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9159459C2C28372D003D2AC0 /* helloworld */ = {
+		9159459C2C28372D003D2AC0 /* ambilighthue */ = {
 			isa = PBXGroup;
 			children = (
 				9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */,
@@ -131,7 +131,7 @@
 				915945A12C28372E003D2AC0 /* Assets.xcassets */,
 				915945A32C28372E003D2AC0 /* Preview Content */,
 			);
-			path = helloworld;
+			path = ambilighthue;
 			sourceTree = "<group>";
 		};
 		915945A32C28372E003D2AC0 /* Preview Content */ = {
@@ -142,32 +142,32 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		915945AD2C28372E003D2AC0 /* helloworldTests */ = {
+		915945AD2C28372E003D2AC0 /* ambilighthueTests */ = {
 			isa = PBXGroup;
 			children = (
-				915945AE2C28372E003D2AC0 /* helloworldTests.swift */,
+				915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */,
 			);
-			path = helloworldTests;
+			path = ambilighthueTests;
 			sourceTree = "<group>";
 		};
-		915945B72C28372E003D2AC0 /* helloworldUITests */ = {
+		915945B72C28372E003D2AC0 /* ambilighthueUITests */ = {
 			isa = PBXGroup;
 			children = (
-				915945B82C28372E003D2AC0 /* helloworldUITests.swift */,
-				915945BA2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift */,
+				915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */,
+				915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */,
 			);
-			path = helloworldUITests;
+			path = ambilighthueUITests;
 			sourceTree = "<group>";
 		};
 		9F61BEB0E91494741FB46E6C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				097204708A8DEFE2E936FAF1 /* Pods-helloworld.debug.xcconfig */,
-				B690851163CFF54FA2024FDB /* Pods-helloworld.release.xcconfig */,
-				DD6AF5FFA470ADD1415E0D28 /* Pods-helloworld-helloworldUITests.debug.xcconfig */,
-				DFB3178D8762D45F8832086E /* Pods-helloworld-helloworldUITests.release.xcconfig */,
-				8950B71FBD26E8650C5FE7F8 /* Pods-helloworldTests.debug.xcconfig */,
-				809A0A0AFE16B6F41C7F4C7A /* Pods-helloworldTests.release.xcconfig */,
+				680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */,
+				EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */,
+				749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */,
+				3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */,
+				11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */,
+				91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -175,30 +175,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		915945992C28372D003D2AC0 /* helloworld */ = {
+		915945992C28372D003D2AC0 /* ambilighthue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 915945BE2C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworld" */;
+			buildConfigurationList = 915945BE2C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthue" */;
 			buildPhases = (
-				95465B5D8F7208B1C0ACAD84 /* [CP] Check Pods Manifest.lock */,
+				95C8CFE676ECA449D8F1D776 /* [CP] Check Pods Manifest.lock */,
 				915945962C28372D003D2AC0 /* Sources */,
 				915945972C28372D003D2AC0 /* Frameworks */,
 				915945982C28372D003D2AC0 /* Resources */,
-				1B6B2C4954305DE8BC715604 /* [CP] Embed Pods Frameworks */,
+				4EC714B3D7929287D0A0483C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = helloworld;
+			name = ambilighthue;
 			productName = helloworld;
-			productReference = 9159459A2C28372D003D2AC0 /* helloworld.app */;
+			productReference = 9159459A2C28372D003D2AC0 /* ambilighthue.app */;
 			productType = "com.apple.product-type.application";
 		};
-		915945A92C28372E003D2AC0 /* helloworldTests */ = {
+		915945A92C28372E003D2AC0 /* ambilighthueTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 915945C12C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworldTests" */;
+			buildConfigurationList = 915945C12C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueTests" */;
 			buildPhases = (
-				02AA4B69333CBD6D84199DED /* [CP] Check Pods Manifest.lock */,
+				DC74869F04E427BD2FCB163B /* [CP] Check Pods Manifest.lock */,
 				915945A62C28372E003D2AC0 /* Sources */,
 				915945A72C28372E003D2AC0 /* Frameworks */,
 				915945A82C28372E003D2AC0 /* Resources */,
@@ -208,29 +208,29 @@
 			dependencies = (
 				915945AC2C28372E003D2AC0 /* PBXTargetDependency */,
 			);
-			name = helloworldTests;
+			name = ambilighthueTests;
 			productName = helloworldTests;
-			productReference = 915945AA2C28372E003D2AC0 /* helloworldTests.xctest */;
+			productReference = 915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		915945B32C28372E003D2AC0 /* helloworldUITests */ = {
+		915945B32C28372E003D2AC0 /* ambilighthueUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworldUITests" */;
+			buildConfigurationList = 915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueUITests" */;
 			buildPhases = (
-				9499D59A9274F58E0C8675F7 /* [CP] Check Pods Manifest.lock */,
+				0678839A6E5E7F3C1C4B2216 /* [CP] Check Pods Manifest.lock */,
 				915945B02C28372E003D2AC0 /* Sources */,
 				915945B12C28372E003D2AC0 /* Frameworks */,
 				915945B22C28372E003D2AC0 /* Resources */,
-				B11F299C12402F3972AF08D9 /* [CP] Embed Pods Frameworks */,
+				0357A9336A857C01BE7958EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				915945B62C28372E003D2AC0 /* PBXTargetDependency */,
 			);
-			name = helloworldUITests;
+			name = ambilighthueUITests;
 			productName = helloworldUITests;
-			productReference = 915945B42C28372E003D2AC0 /* helloworldUITests.xctest */;
+			productReference = 915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -241,7 +241,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					915945992C28372D003D2AC0 = {
 						CreatedOnToolsVersion = 15.4;
@@ -256,7 +256,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 915945952C28372D003D2AC0 /* Build configuration list for PBXProject "helloworld" */;
+			buildConfigurationList = 915945952C28372D003D2AC0 /* Build configuration list for PBXProject "ambilighthue" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -269,9 +269,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				915945992C28372D003D2AC0 /* helloworld */,
-				915945A92C28372E003D2AC0 /* helloworldTests */,
-				915945B32C28372E003D2AC0 /* helloworldUITests */,
+				915945992C28372D003D2AC0 /* ambilighthue */,
+				915945A92C28372E003D2AC0 /* ambilighthueTests */,
+				915945B32C28372E003D2AC0 /* ambilighthueUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -303,46 +303,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02AA4B69333CBD6D84199DED /* [CP] Check Pods Manifest.lock */ = {
+		0357A9336A857C01BE7958EE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-helloworldTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1B6B2C4954305DE8BC715604 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-helloworld/Pods-helloworld-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-helloworld/Pods-helloworld-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-helloworld/Pods-helloworld-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9499D59A9274F58E0C8675F7 /* [CP] Check Pods Manifest.lock */ = {
+		0678839A6E5E7F3C1C4B2216 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -357,50 +335,72 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-helloworld-helloworldUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ambilighthue-ambilighthueUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		95465B5D8F7208B1C0ACAD84 /* [CP] Check Pods Manifest.lock */ = {
+		4EC714B3D7929287D0A0483C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-helloworld-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B11F299C12402F3972AF08D9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-helloworld-helloworldUITests/Pods-helloworld-helloworldUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		95C8CFE676ECA449D8F1D776 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ambilighthue-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC74869F04E427BD2FCB163B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ambilighthueTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -420,7 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915945AF2C28372E003D2AC0 /* helloworldTests.swift in Sources */,
+				915945AF2C28372E003D2AC0 /* ambilighthueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +428,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915945BB2C28372E003D2AC0 /* helloworldUITestsLaunchTests.swift in Sources */,
-				915945B92C28372E003D2AC0 /* helloworldUITests.swift in Sources */,
+				915945BB2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift in Sources */,
+				915945B92C28372E003D2AC0 /* ambilighthueUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,12 +438,12 @@
 /* Begin PBXTargetDependency section */
 		915945AC2C28372E003D2AC0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 915945992C28372D003D2AC0 /* helloworld */;
+			target = 915945992C28372D003D2AC0 /* ambilighthue */;
 			targetProxy = 915945AB2C28372E003D2AC0 /* PBXContainerItemProxy */;
 		};
 		915945B62C28372E003D2AC0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 915945992C28372D003D2AC0 /* helloworld */;
+			target = 915945992C28372D003D2AC0 /* ambilighthue */;
 			targetProxy = 915945B52C28372E003D2AC0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -486,7 +486,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -549,7 +549,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -570,14 +570,14 @@
 		};
 		915945BF2C28372E003D2AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 097204708A8DEFE2E936FAF1 /* Pods-helloworld.debug.xcconfig */;
+			baseConfigurationReference = 680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"helloworld/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ambilighthue/Preview Content\"";
 				DEVELOPMENT_TEAM = MPM882X566;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -589,7 +589,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworld;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -599,14 +599,14 @@
 		};
 		915945C02C28372E003D2AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B690851163CFF54FA2024FDB /* Pods-helloworld.release.xcconfig */;
+			baseConfigurationReference = EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"helloworld/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ambilighthue/Preview Content\"";
 				DEVELOPMENT_TEAM = MPM882X566;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -618,7 +618,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworld;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -628,84 +628,86 @@
 		};
 		915945C22C28372E003D2AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8950B71FBD26E8650C5FE7F8 /* Pods-helloworldTests.debug.xcconfig */;
+			baseConfigurationReference = 11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MPM882X566;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworldTests;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/helloworld.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/helloworld";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ambilighthue.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ambilighthue";
 				TVOS_DEPLOYMENT_TARGET = 17.5;
 			};
 			name = Debug;
 		};
 		915945C32C28372E003D2AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 809A0A0AFE16B6F41C7F4C7A /* Pods-helloworldTests.release.xcconfig */;
+			baseConfigurationReference = 91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MPM882X566;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworldTests;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/helloworld.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/helloworld";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ambilighthue.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ambilighthue";
 				TVOS_DEPLOYMENT_TARGET = 17.5;
 			};
 			name = Release;
 		};
 		915945C52C28372E003D2AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD6AF5FFA470ADD1415E0D28 /* Pods-helloworld-helloworldUITests.debug.xcconfig */;
+			baseConfigurationReference = 749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MPM882X566;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworldUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = helloworld;
+				TEST_TARGET_NAME = ambilighthue;
 			};
 			name = Debug;
 		};
 		915945C62C28372E003D2AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFB3178D8762D45F8832086E /* Pods-helloworld-helloworldUITests.release.xcconfig */;
+			baseConfigurationReference = 3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MPM882X566;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.helloworldUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = helloworld;
+				TEST_TARGET_NAME = ambilighthue;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		915945952C28372D003D2AC0 /* Build configuration list for PBXProject "helloworld" */ = {
+		915945952C28372D003D2AC0 /* Build configuration list for PBXProject "ambilighthue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				915945BC2C28372E003D2AC0 /* Debug */,
@@ -714,7 +716,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		915945BE2C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworld" */ = {
+		915945BE2C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				915945BF2C28372E003D2AC0 /* Debug */,
@@ -723,7 +725,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		915945C12C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworldTests" */ = {
+		915945C12C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				915945C22C28372E003D2AC0 /* Debug */,
@@ -732,7 +734,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "helloworldUITests" */ = {
+		915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				915945C52C28372E003D2AC0 /* Debug */,

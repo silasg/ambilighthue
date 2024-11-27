@@ -1,18 +1,18 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'helloworld' do
+target 'ambilighthue' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for helloworld
+  # Pods for ambilighthue
 
-  target 'helloworldTests' do
+  target 'ambilighthueTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'helloworldUITests' do
+  target 'ambilighthueUITests' do
     # Pods for testing
   end
 pod "Alamofire"
