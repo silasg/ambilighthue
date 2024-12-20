@@ -12,6 +12,24 @@ enum AmbilightHueMode {
     case enabled, disabled
 }
 
+class AmbilightTvConfig {
+    let defaults = UserDefaults.standard
+
+    func configure(tvIp: String, username: String, password: String) {
+        defaults.set(tvIp, forKey: "tvIp")
+        defaults.set(username, forKey: "username")
+        defaults.set(password, forKey: "password")
+    }
+    
+    var isConfigured: Bool {
+        return defaults.string(forKey: "tvIp") != nil && defaults.string(forKey: "username") != nil && defaults.string(forKey: "password") != nil
+    }
+    
+    var tvIp: String { return defaults.string(forKey: "tvIp").unsafelyUnwrapped }
+    var username: String { return defaults.string(forKey: "username").unsafelyUnwrapped }
+    var password: String { return defaults.string(forKey: "password").unsafelyUnwrapped }
+}
+
 class AmbilightTv : ObservableObject{
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
@@ -23,9 +41,9 @@ class AmbilightTv : ObservableObject{
     var session: Session
 
     
-    init(tvIp: String, username: String, password: String) {
-        self.credential = URLCredential(user: username, password: password, persistence: .forSession)
-        self.tvIp = tvIp
+    init(config: AmbilightTvConfig) {
+        self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
+        self.tvIp = config.tvIp
         let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
             self.tvIp: DisabledTrustEvaluator()
             ]

@@ -9,10 +9,7 @@ import SwiftUI
 
 struct AmbilightHueControlView: View {
     let menuItems = [("Off", AmbilightHueMode.disabled), ("On", AmbilightHueMode.enabled)]
-    static let usr = "REDACTED"
-    static let pwd = "REDACTED"
-    static let tvIp = "TV_IP"
-    @StateObject private var ambilightTv = AmbilightTv(tvIp: tvIp, username: usr, password: pwd)
+    @StateObject private var ambilightTv = AmbilightTv(config: AmbilightTvConfig())
     
   var body: some View {
     VStack(spacing: 20) {
