@@ -10,6 +10,7 @@ target 'ambilighthue' do
   target 'ambilighthueTests' do
     inherit! :search_paths
     # Pods for testing
+    #pod "Mocker"
   end
 
   target 'ambilighthueUITests' do

@@ -41,13 +41,17 @@ class AmbilightTv : ObservableObject{
     var session: Session
 
     
-    init(config: AmbilightTvConfig) {
+    init(config: AmbilightTvConfig, session: Session?) {
         self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
         self.tvIp = config.tvIp
-        let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
-            self.tvIp: DisabledTrustEvaluator()
-            ]
-        self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
+        if (session == nil) {
+            let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
+                self.tvIp: DisabledTrustEvaluator()
+                ]
+            self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
+        } else {
+            self.session = session.unsafelyUnwrapped
+        }
         updateState()//todo: move
     }
     

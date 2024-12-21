@@ -9,7 +9,9 @@ import SwiftUI
 
 struct AmbilightHueControlView: View {
     let menuItems = [("Off", AmbilightHueMode.disabled), ("On", AmbilightHueMode.enabled)]
-    @StateObject private var ambilightTv = AmbilightTv(config: AmbilightTvConfig())
+    
+    @StateObject private var ambilightTv = AmbilightTv(config: AmbilightTvConfig(), session: nil)
+    
     
   var body: some View {
     VStack(spacing: 20) {

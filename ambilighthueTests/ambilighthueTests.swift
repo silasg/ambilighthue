@@ -6,6 +6,8 @@
 //
 
 import XCTest
+import Mocker
+import Alamofire
 @testable import ambilighthue
 
 final class ambilighthueTests: XCTestCase {
@@ -16,21 +18,36 @@ final class ambilighthueTests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        Mocker.removeAll()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+    func test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint() throws {
+         // arrange
+        let configuration = URLSessionConfiguration.af.default
+        configuration.protocolClasses = [MockingURLProtocol.self]
+        let sessionManager = Alamofire.Session(configuration: configuration)
+        let tvip = "TV_IP"
+        let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!
+        
+        //Mocker.mode = .optin
+        let mock = Mock(url: tvendpoint, contentType: .json, statusCode: 200, data: [
+            .get : "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
+        ])
+        mock.register()
+        
+        let config = AmbilightTvConfig()
+        config.configure(tvIp: tvip, username: "usr", password: "pwd")
+        
+        // act
+        let sut = AmbilightTv(config: config, session: sessionManager)
+        sut.updateState()
+        
+        // assert
+        let ambilightHueEnabledExpectation = expectation(for: NSPredicate { _, _ in
+            return (sut.currentState == Optional(AmbilightHueMode.enabled))
+        }, evaluatedWith: nil)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        wait(for: [ambilightHueEnabledExpectation], timeout: 2.0)
     }
 
 }

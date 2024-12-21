@@ -15,6 +15,7 @@
 		915945B92C28372E003D2AC0 /* ambilighthueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */; };
 		915945BB2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */; };
 		915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* AmbilightTv.swift */; };
+		91D92E1F2D16FDD20025E3B9 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 91D92E1E2D16FDD20025E3B9 /* Mocker */; };
 		A6D85DCD6C1BDB2B5D2C3612 /* Pods_ambilighthue_ambilighthueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */; };
 		DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */; };
 		FDCA49192DBD7B8AF51F9AA7 /* Pods_ambilighthue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */; };
@@ -75,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */,
+				91D92E1F2D16FDD20025E3B9 /* Mocker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +267,9 @@
 				Base,
 			);
 			mainGroup = 915945912C28372D003D2AC0;
+			packageReferences = (
+				91D92E1D2D16FDD20025E3B9 /* XCRemoteSwiftPackageReference "Mocker" */,
+			);
 			productRefGroup = 9159459B2C28372D003D2AC0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -744,6 +749,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		91D92E1D2D16FDD20025E3B9 /* XCRemoteSwiftPackageReference "Mocker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WeTransfer/Mocker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		91D92E1E2D16FDD20025E3B9 /* Mocker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91D92E1D2D16FDD20025E3B9 /* XCRemoteSwiftPackageReference "Mocker" */;
+			productName = Mocker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 915945922C28372D003D2AC0 /* Project object */;
 }
