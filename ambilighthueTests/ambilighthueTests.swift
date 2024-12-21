@@ -26,7 +26,7 @@ final class ambilighthueTests: XCTestCase {
         let configuration = URLSessionConfiguration.af.default
         configuration.protocolClasses = [MockingURLProtocol.self]
         let sessionManager = Alamofire.Session(configuration: configuration)
-        let tvip = "TV_IP"
+        let tvip = "mocked.tv"
         let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!
         
         //Mocker.mode = .optin
@@ -43,11 +43,19 @@ final class ambilighthueTests: XCTestCase {
         sut.updateState()
         
         // assert
-        let ambilightHueEnabledExpectation = expectation(for: NSPredicate { _, _ in
-            return (sut.currentState == Optional(AmbilightHueMode.enabled))
-        }, evaluatedWith: nil)
-
+        let ambilightHueEnabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.enabled))
         wait(for: [ambilightHueEnabledExpectation], timeout: 2.0)
     }
 
+}
+
+
+extension XCTestCase {
+    func expectation(for condition: @autoclosure @escaping () -> Bool) -> XCTestExpectation {
+        let predicate = NSPredicate { _, _ in
+            return condition()
+        }
+                
+        return XCTNSPredicateExpectation(predicate: predicate, object: nil)
+    }
 }
