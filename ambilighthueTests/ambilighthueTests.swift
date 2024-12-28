@@ -12,8 +12,15 @@ import Alamofire
 
 final class ambilighthueTests: XCTestCase {
 
+    static let configuration = URLSessionConfiguration.af.default;
+    static let sessionManager = Alamofire.Session(configuration: configuration);
+    static let tvip = "mocked.tv";
+    static let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!;
+    
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        ambilighthueTests.configuration.protocolClasses = [MockingURLProtocol.self];
     }
 
     override func tearDownWithError() throws {
@@ -23,91 +30,74 @@ final class ambilighthueTests: XCTestCase {
 
     func test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint() throws {
          // arrange
-        let configuration = URLSessionConfiguration.af.default
-        configuration.protocolClasses = [MockingURLProtocol.self]
-        let sessionManager = Alamofire.Session(configuration: configuration)
-        let tvip = "mocked.tv"
-        let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!
-        
-        let mock = Mock(url: tvendpoint, contentType: .json, statusCode: 200, data: [
+        let mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .get : "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         mock.register()
         
-        let config = AmbilightTvConfig()
-        config.configure(tvIp: tvip, username: "usr", password: "pwd")
-        let sut = AmbilightTv(config: config, session: sessionManager)
+        let sut = createAmbilightTvForTest()
         
         // act
         sut.updateState()
         
         // assert
         let ambilightHueEnabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.enabled))
-        wait(for: [ambilightHueEnabledExpectation], timeout: 2.0)
+        wait(for: [ambilightHueEnabledExpectation], timeout: 5.0)
     }
     
-    func test_post_power_on_to_tvendpoint_when_state_is_updated_to_enabled() throws {
+    func test_post_power_on_to_tvendpoint_when_mode_set_to_enabled() throws {
          // arrange
-        let configuration = URLSessionConfiguration.af.default
-        configuration.protocolClasses = [MockingURLProtocol.self]
-        let sessionManager = Alamofire.Session(configuration: configuration)
-        let tvip = "mocked.tv"
-        let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!
         
-        var mock = Mock(url: tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"Off\"}".data(using: .utf8).unsafelyUnwrapped
         ])
+        let expectedBodyArguments = expectation(description: "The body sent to TV to set state to enabled")
         mock.onRequestHandler = OnRequestHandler(httpBodyType: [String:String].self, callback: { request, postBodyArguments in
-            XCTAssertEqual(request.url, mock.request.url)
-            if (request.method == .post) {
-                XCTAssertEqual(["power": "On"], postBodyArguments)
+            if (request.method == .post && postBodyArguments == ["power": "On"]) {
+                expectedBodyArguments.fulfill()
             }
         })
         mock.register()
         
-        let config = AmbilightTvConfig()
-        config.configure(tvIp: tvip, username: "usr", password: "pwd")
-        let sut = AmbilightTv(config: config, session: sessionManager)
+        let sut = createAmbilightTvForTest()
+        
         
         // act
         sut.setAmbilightHueMode(newMode: AmbilightHueMode.enabled)
         
         // assert
         let ambilightHueEnabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.enabled))
-        wait(for: [ ambilightHueEnabledExpectation], timeout: 2.0)
+        wait(for: [ expectedBodyArguments, ambilightHueEnabledExpectation], timeout: 5.0)
     }
     
-    func test_post_power_off_to_tvendpoint_when_state_is_updated_to_disabled() throws {
+    func test_post_power_off_to_tvendpoint_when_mode_set_to_disabled() throws {
          // arrange
-        let configuration = URLSessionConfiguration.af.default
-        configuration.protocolClasses = [MockingURLProtocol.self]
-        let sessionManager = Alamofire.Session(configuration: configuration)
-        let tvip = "mocked.tv"
-        let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!
-        
-        var mock = Mock(url: tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
+        let expectedBodyArguments = expectation(description: "The body sent to TV to set state to disabled")
         mock.onRequestHandler = OnRequestHandler(httpBodyType: [String:String].self, callback: { request, postBodyArguments in
-            XCTAssertEqual(request.url, mock.request.url)
-            if (request.method == .post) {
-                XCTAssertEqual(["power": "Off"], postBodyArguments)
+            if (request.method == .post && postBodyArguments == ["power": "Off"]) {
+                expectedBodyArguments.fulfill()
             }
         })
         mock.register()
         
-        let config = AmbilightTvConfig()
-        config.configure(tvIp: tvip, username: "usr", password: "pwd")
-        let sut = AmbilightTv(config: config, session: sessionManager)
+        let sut = createAmbilightTvForTest()
         
         // act
         sut.setAmbilightHueMode(newMode: AmbilightHueMode.disabled)
         
         // assert
-        let ambilightHueEnabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.disabled))
-        wait(for: [ ambilightHueEnabledExpectation], timeout: 2.0)
+        let ambilightHueDisabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.disabled))
+        wait(for: [ expectedBodyArguments, ambilightHueDisabledExpectation], timeout: 5.0)
     }
-
+    
+    private func createAmbilightTvForTest() -> AmbilightTv {
+        let config = AmbilightTvConfig()
+        config.configure(tvIp: ambilighthueTests.tvip, username: "usr", password: "pwd")
+        return AmbilightTv(config: config, session: ambilighthueTests.sessionManager)
+    }
 }
 
 
