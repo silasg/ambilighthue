@@ -47,7 +47,6 @@ final class ambilighthueTests: XCTestCase {
     
     func test_post_power_on_to_tvendpoint_when_mode_set_to_enabled() throws {
          // arrange
-        
         var mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"Off\"}".data(using: .utf8).unsafelyUnwrapped
         ])
