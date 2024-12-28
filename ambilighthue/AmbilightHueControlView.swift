@@ -10,8 +10,12 @@ import SwiftUI
 struct AmbilightHueControlView: View {
     let menuItems = [("Off", AmbilightHueMode.disabled), ("On", AmbilightHueMode.enabled)]
     
-    @StateObject private var ambilightTv = AmbilightTv(config: AmbilightTvConfig(), session: nil)
+    @StateObject private var ambilightTv: AmbilightTv
     
+    init(ambilightTv: AmbilightTv) {
+        _ambilightTv = StateObject(wrappedValue: ambilightTv)
+        ambilightTv.updateState()
+    }
     
   var body: some View {
     VStack(spacing: 20) {
@@ -34,8 +38,6 @@ struct AmbilightHueControlView: View {
             .buttonStyle(CardButtonStyle())
         }
         
-
-      //Text(call.log)
       Spacer()
     }
     .padding()
@@ -53,5 +55,5 @@ struct AmbilightHueControlView: View {
 
 
 #Preview {
-    AmbilightHueControlView()
+    AmbilightHueControlView(ambilightTv: AmbilightTv(config: AmbilightTvConfig(), session: nil))
 }

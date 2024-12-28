@@ -27,20 +27,19 @@ struct ambilightHueApp: App {
     let pwd = "REDACTED"
     let tvIp = "TV_IP"
     
-    init() {
-        configure()
-    }
-    
-    func configure() {
+    func configure() -> AmbilightTvConfig {
         let config = AmbilightTvConfig();
         if (!config.isConfigured) {
             config.configure(tvIp: tvIp, username: usr, password: pwd);
         }
+        return config;
     }
     
     var body: some Scene {
+        let ambilightTv = AmbilightTv(config: configure(), session: nil)
+        
         WindowGroup {
-            AmbilightHueControlView()
+            AmbilightHueControlView(ambilightTv: ambilightTv)
         }
     }
 }

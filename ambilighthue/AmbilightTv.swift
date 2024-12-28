@@ -49,7 +49,6 @@ class AmbilightTv : ObservableObject{
                 self.tvIp: DisabledTrustEvaluator()
                 ]
             self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
-            updateState()//todo: move by making this class a ctor dep for ControlView and calling updateState after construction of this class in app main
         } else {
             self.session = session.unsafelyUnwrapped
         }
