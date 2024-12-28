@@ -12,34 +12,13 @@ enum AmbilightHueMode {
     case enabled, disabled
 }
 
-class AmbilightTvConfig {
-    let defaults = UserDefaults.standard
-
-    func configure(tvIp: String, username: String, password: String) {
-        defaults.set(tvIp, forKey: "tvIp")
-        defaults.set(username, forKey: "username")
-        defaults.set(password, forKey: "password")
-    }
-    
-    var isConfigured: Bool {
-        return defaults.string(forKey: "tvIp") != nil && defaults.string(forKey: "username") != nil && defaults.string(forKey: "password") != nil
-    }
-    
-    var tvIp: String { return defaults.string(forKey: "tvIp").unsafelyUnwrapped }
-    var username: String { return defaults.string(forKey: "username").unsafelyUnwrapped }
-    var password: String { return defaults.string(forKey: "password").unsafelyUnwrapped }
-}
-
 class AmbilightTv : ObservableObject{
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
    
     var tvIp: String
     var credential: URLCredential
-    
- 
     var session: Session
-
     
     init(config: AmbilightTvConfig, session: Session?) {
         self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
@@ -69,16 +48,13 @@ class AmbilightTv : ObservableObject{
                 self.log = error.localizedDescription
                 self.currentState = nil
             }
-                debugPrint(r)
-            }
+            debugPrint(r)
+        }
     }
     
     func setAmbilightHueMode(newMode: AmbilightHueMode) {
-        
         let powerState = newMode == AmbilightHueMode.enabled ? "On" : "Off"
-        
         let parameters: [String: Any] = ["power": powerState]
-        
         
         session.request("https://\(tvIp):1926/6/HueLamp/power", method: .post,
                         parameters: parameters, encoding: JSONEncoding.default)
@@ -90,9 +66,8 @@ class AmbilightTv : ObservableObject{
             case .failure(let error):
                 self.log = error.localizedDescription
             }
-                debugPrint(response)
-            }
-        
+            debugPrint(response)
+        }
     }
 }
 
