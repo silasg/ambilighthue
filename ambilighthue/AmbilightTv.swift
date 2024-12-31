@@ -12,7 +12,14 @@ enum AmbilightHueMode {
     case enabled, disabled
 }
 
-class AmbilightTv : ObservableObject{
+protocol AmbilightTvProtocol: ObservableObject {
+    func updateState()
+    func setAmbilightHueMode(newMode: AmbilightHueMode)
+    var currentState: AmbilightHueMode? { get }
+    var log: String { get }
+}
+
+class AmbilightTv : AmbilightTvProtocol, ObservableObject{
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
    

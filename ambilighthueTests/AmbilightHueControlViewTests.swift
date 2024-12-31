@@ -8,6 +8,7 @@
 import XCTest
 import ViewInspector
 @testable import ambilighthue
+import SwiftUI
 
 final class AmbilightHueControlViewTests: XCTestCase {
 
@@ -28,9 +29,13 @@ final class AmbilightHueControlViewTests: XCTestCase {
     func testView() throws {
         // UI tests must launch the application that they test.
         let view = AmbilightHueControlView(ambilightTv: AmbilightTv(config: AmbilightTvConfig(), session: nil)) // TODO: mock ambilightTv
-    let sut = try view.inspect().find(button: "On")
+        let button = try view.inspect().find(button: "Off")
+        let style = try button.buttonStyle()
+        let images = button.findAll(ViewType.Image.self)
         
-       XCTAssertNotNil(sut)
+        XCTAssert(style is CardButtonStyle)
+       XCTAssertNotNil(button)
+      //  XCTAssert(images.count > 0)
         
        
 

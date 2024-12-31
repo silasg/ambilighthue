@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AmbilightHueControlView: View {
+struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
     let menuItems = [("Off", AmbilightHueMode.disabled), ("On", AmbilightHueMode.enabled)]
     
-    @StateObject private var ambilightTv: AmbilightTv
+    @StateObject private var ambilightTv: T
     
-    init(ambilightTv: AmbilightTv) {
+    init(ambilightTv: T) {
         _ambilightTv = StateObject(wrappedValue: ambilightTv)
         ambilightTv.updateState()
     }
