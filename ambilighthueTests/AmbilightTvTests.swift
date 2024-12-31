@@ -10,7 +10,7 @@ import Mocker
 import Alamofire
 @testable import ambilighthue
 
-final class ambilighthueTests: XCTestCase {
+final class AmbilightTvTests: XCTestCase {
 
     static let configuration = URLSessionConfiguration.af.default;
     static let sessionManager = Alamofire.Session(configuration: configuration);
@@ -20,7 +20,7 @@ final class ambilighthueTests: XCTestCase {
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        ambilighthueTests.configuration.protocolClasses = [MockingURLProtocol.self];
+        AmbilightTvTests.configuration.protocolClasses = [MockingURLProtocol.self];
     }
 
     override func tearDownWithError() throws {
@@ -30,7 +30,7 @@ final class ambilighthueTests: XCTestCase {
 
     func test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint() throws {
          // arrange
-        let mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        let mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .get : "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         mock.register()
@@ -47,7 +47,7 @@ final class ambilighthueTests: XCTestCase {
     
     func test_post_power_on_to_tvendpoint_when_mode_set_to_enabled() throws {
          // arrange
-        var mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"Off\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         let expectedBodyArguments = expectation(description: "The body sent to TV to set state to enabled")
@@ -71,7 +71,7 @@ final class ambilighthueTests: XCTestCase {
     
     func test_post_power_off_to_tvendpoint_when_mode_set_to_disabled() throws {
          // arrange
-        var mock = Mock(url: ambilighthueTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         let expectedBodyArguments = expectation(description: "The body sent to TV to set state to disabled")
@@ -94,8 +94,8 @@ final class ambilighthueTests: XCTestCase {
     
     private func createAmbilightTvForTest() -> AmbilightTv {
         let config = AmbilightTvConfig()
-        config.configure(tvIp: ambilighthueTests.tvip, username: "usr", password: "pwd")
-        return AmbilightTv(config: config, session: ambilighthueTests.sessionManager)
+        config.configure(tvIp: AmbilightTvTests.tvip, username: "usr", password: "pwd")
+        return AmbilightTv(config: config, session: AmbilightTvTests.sessionManager)
     }
 }
 

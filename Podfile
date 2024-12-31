@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :tvos, '17.5'
 
 target 'ambilighthue' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,10 +11,8 @@ target 'ambilighthue' do
     inherit! :search_paths
     # Pods for testing
     #pod "Mocker"
+    pod 'ViewInspector'
   end
 
-  target 'ambilighthueUITests' do
-    # Pods for testing
-  end
 pod "Alamofire"
 end

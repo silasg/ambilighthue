@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (5.10.2)
+  - ViewInspector (0.10.1)
 
 DEPENDENCIES:
   - Alamofire
+  - ViewInspector
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ViewInspector
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  ViewInspector: 3649135739ba786b0889fb0e093b911008c8e5d0
 
-PODFILE CHECKSUM: baf9c15225e291538b4ea66a61e84232bcd7c006
+PODFILE CHECKSUM: 834985254470ce2e9964129d7f4e1bb3d9724c3e
 
 COCOAPODS: 1.16.2

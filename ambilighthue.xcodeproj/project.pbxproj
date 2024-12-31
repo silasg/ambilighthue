@@ -7,19 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BABDFD45F22EE0AFE9C85C2 /* Pods_ambilighthue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971D087BFA4A6F649FA1224A /* Pods_ambilighthue.framework */; };
+		9102F8582D23F966006555CF /* AmbilightHueControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */; };
 		9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */; };
 		915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */; };
 		915945A22C28372E003D2AC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A12C28372E003D2AC0 /* Assets.xcassets */; };
 		915945A52C28372E003D2AC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A42C28372E003D2AC0 /* Preview Assets.xcassets */; };
-		915945AF2C28372E003D2AC0 /* ambilighthueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */; };
-		915945B92C28372E003D2AC0 /* ambilighthueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */; };
-		915945BB2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */; };
+		915945AF2C28372E003D2AC0 /* AmbilightTvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */; };
 		915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* AmbilightTv.swift */; };
 		91D92E1F2D16FDD20025E3B9 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 91D92E1E2D16FDD20025E3B9 /* Mocker */; };
 		91E22EF72D20859F00034DEB /* AmbilightTvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E22EF62D20859F00034DEB /* AmbilightTvConfig.swift */; };
-		A6D85DCD6C1BDB2B5D2C3612 /* Pods_ambilighthue_ambilighthueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */; };
-		DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */; };
-		FDCA49192DBD7B8AF51F9AA7 /* Pods_ambilighthue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */; };
+		B2FF6AF3AA360672A6EDA84A /* Pods_ambilighthueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29209E387B2026A2FA51774B /* Pods_ambilighthueTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,38 +28,26 @@
 			remoteGlobalIDString = 915945992C28372D003D2AC0;
 			remoteInfo = helloworld;
 		};
-		915945B52C28372E003D2AC0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 915945922C28372D003D2AC0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 915945992C28372D003D2AC0;
-			remoteInfo = helloworld;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue-ambilighthueUITests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests.release.xcconfig"; sourceTree = "<group>"; };
-		680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.debug.xcconfig"; sourceTree = "<group>"; };
-		749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue-ambilighthueUITests.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		29209E387B2026A2FA51774B /* Pods_ambilighthueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38C47B317CB7F7CDD0B7F9AA /* Pods-ambilighthueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.debug.xcconfig"; sourceTree = "<group>"; };
+		772E1536E5DDA402B6FC04F0 /* Pods-ambilighthue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.release.xcconfig"; sourceTree = "<group>"; };
+		9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlViewTests.swift; sourceTree = "<group>"; };
 		9159459A2C28372D003D2AC0 /* ambilighthue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambilighthue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilightHueApp.swift; sourceTree = "<group>"; };
 		9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlView.swift; sourceTree = "<group>"; };
 		915945A12C28372E003D2AC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		915945A42C28372E003D2AC0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambilighthueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueTests.swift; sourceTree = "<group>"; };
-		915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambilighthueUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueUITests.swift; sourceTree = "<group>"; };
-		915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilighthueUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvTests.swift; sourceTree = "<group>"; };
 		915945C72C28551E003D2AC0 /* AmbilightTv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTv.swift; sourceTree = "<group>"; };
-		91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.release.xcconfig"; sourceTree = "<group>"; };
 		91E22EF62D20859F00034DEB /* AmbilightTvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvConfig.swift; sourceTree = "<group>"; };
 		91F63C382C2EE2EF009BBBE3 /* todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = todo.md; sourceTree = "<group>"; };
-		A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue_ambilighthueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.release.xcconfig"; sourceTree = "<group>"; };
-		F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		971D087BFA4A6F649FA1224A /* Pods_ambilighthue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC2F8D547D974DE200AB41E8 /* Pods-ambilighthueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.release.xcconfig"; sourceTree = "<group>"; };
+		F3B7543FE67F08AB0837CF1D /* Pods-ambilighthue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.debug.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDCA49192DBD7B8AF51F9AA7 /* Pods_ambilighthue.framework in Frameworks */,
+				3BABDFD45F22EE0AFE9C85C2 /* Pods_ambilighthue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,28 +63,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCE7D29D7E3253875179AF73 /* Pods_ambilighthueTests.framework in Frameworks */,
 				91D92E1F2D16FDD20025E3B9 /* Mocker in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		915945B12C28372E003D2AC0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A6D85DCD6C1BDB2B5D2C3612 /* Pods_ambilighthue_ambilighthueUITests.framework in Frameworks */,
+				B2FF6AF3AA360672A6EDA84A /* Pods_ambilighthueTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		443C90D731F964ADF3E66AEA /* Frameworks */ = {
+		26A5B51C6E90E6F3636351B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				886DAC0CF7616E9DA5CCBB83 /* Pods_ambilighthue.framework */,
-				A16BB73053233E76F6B258CD /* Pods_ambilighthue_ambilighthueUITests.framework */,
-				F7655F00C96D32C78F8D7DF9 /* Pods_ambilighthueTests.framework */,
+				971D087BFA4A6F649FA1224A /* Pods_ambilighthue.framework */,
+				29209E387B2026A2FA51774B /* Pods_ambilighthueTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -109,10 +86,9 @@
 				91F63C382C2EE2EF009BBBE3 /* todo.md */,
 				9159459C2C28372D003D2AC0 /* ambilighthue */,
 				915945AD2C28372E003D2AC0 /* ambilighthueTests */,
-				915945B72C28372E003D2AC0 /* ambilighthueUITests */,
 				9159459B2C28372D003D2AC0 /* Products */,
 				9F61BEB0E91494741FB46E6C /* Pods */,
-				443C90D731F964ADF3E66AEA /* Frameworks */,
+				26A5B51C6E90E6F3636351B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,7 +97,6 @@
 			children = (
 				9159459A2C28372D003D2AC0 /* ambilighthue.app */,
 				915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */,
-				915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -150,29 +125,19 @@
 		915945AD2C28372E003D2AC0 /* ambilighthueTests */ = {
 			isa = PBXGroup;
 			children = (
-				915945AE2C28372E003D2AC0 /* ambilighthueTests.swift */,
+				915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */,
+				9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */,
 			);
 			path = ambilighthueTests;
-			sourceTree = "<group>";
-		};
-		915945B72C28372E003D2AC0 /* ambilighthueUITests */ = {
-			isa = PBXGroup;
-			children = (
-				915945B82C28372E003D2AC0 /* ambilighthueUITests.swift */,
-				915945BA2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift */,
-			);
-			path = ambilighthueUITests;
 			sourceTree = "<group>";
 		};
 		9F61BEB0E91494741FB46E6C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */,
-				EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */,
-				749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */,
-				3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */,
-				11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */,
-				91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */,
+				F3B7543FE67F08AB0837CF1D /* Pods-ambilighthue.debug.xcconfig */,
+				772E1536E5DDA402B6FC04F0 /* Pods-ambilighthue.release.xcconfig */,
+				38C47B317CB7F7CDD0B7F9AA /* Pods-ambilighthueTests.debug.xcconfig */,
+				DC2F8D547D974DE200AB41E8 /* Pods-ambilighthueTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -184,11 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 915945BE2C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthue" */;
 			buildPhases = (
-				95C8CFE676ECA449D8F1D776 /* [CP] Check Pods Manifest.lock */,
+				4253CB0CDE3E5976EAE15739 /* [CP] Check Pods Manifest.lock */,
 				915945962C28372D003D2AC0 /* Sources */,
 				915945972C28372D003D2AC0 /* Frameworks */,
 				915945982C28372D003D2AC0 /* Resources */,
-				4EC714B3D7929287D0A0483C /* [CP] Embed Pods Frameworks */,
+				CE5AE0C80FA7C3ADE3036C5E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -203,10 +168,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 915945C12C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueTests" */;
 			buildPhases = (
-				DC74869F04E427BD2FCB163B /* [CP] Check Pods Manifest.lock */,
+				A1B913326038EE89C1A48897 /* [CP] Check Pods Manifest.lock */,
 				915945A62C28372E003D2AC0 /* Sources */,
 				915945A72C28372E003D2AC0 /* Frameworks */,
 				915945A82C28372E003D2AC0 /* Resources */,
+				9C878B9C492C4C13FE1B06D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,26 +183,6 @@
 			productName = helloworldTests;
 			productReference = 915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		915945B32C28372E003D2AC0 /* ambilighthueUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueUITests" */;
-			buildPhases = (
-				0678839A6E5E7F3C1C4B2216 /* [CP] Check Pods Manifest.lock */,
-				915945B02C28372E003D2AC0 /* Sources */,
-				915945B12C28372E003D2AC0 /* Frameworks */,
-				915945B22C28372E003D2AC0 /* Resources */,
-				0357A9336A857C01BE7958EE /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				915945B62C28372E003D2AC0 /* PBXTargetDependency */,
-			);
-			name = ambilighthueUITests;
-			productName = helloworldUITests;
-			productReference = 915945B42C28372E003D2AC0 /* ambilighthueUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -252,10 +198,6 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					915945A92C28372E003D2AC0 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 915945992C28372D003D2AC0;
-					};
-					915945B32C28372E003D2AC0 = {
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 915945992C28372D003D2AC0;
 					};
@@ -279,7 +221,6 @@
 			targets = (
 				915945992C28372D003D2AC0 /* ambilighthue */,
 				915945A92C28372E003D2AC0 /* ambilighthueTests */,
-				915945B32C28372E003D2AC0 /* ambilighthueUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,73 +242,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		915945B22C28372E003D2AC0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0357A9336A857C01BE7958EE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthue-ambilighthueUITests/Pods-ambilighthue-ambilighthueUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0678839A6E5E7F3C1C4B2216 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ambilighthue-ambilighthueUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4EC714B3D7929287D0A0483C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95C8CFE676ECA449D8F1D776 /* [CP] Check Pods Manifest.lock */ = {
+		4253CB0CDE3E5976EAE15739 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,7 +267,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC74869F04E427BD2FCB163B /* [CP] Check Pods Manifest.lock */ = {
+		9C878B9C492C4C13FE1B06D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1B913326038EE89C1A48897 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -411,6 +306,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CE5AE0C80FA7C3ADE3036C5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -429,16 +341,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				915945AF2C28372E003D2AC0 /* ambilighthueTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		915945B02C28372E003D2AC0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				915945BB2C28372E003D2AC0 /* ambilighthueUITestsLaunchTests.swift in Sources */,
-				915945B92C28372E003D2AC0 /* ambilighthueUITests.swift in Sources */,
+				915945AF2C28372E003D2AC0 /* AmbilightTvTests.swift in Sources */,
+				9102F8582D23F966006555CF /* AmbilightHueControlViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,11 +353,6 @@
 			isa = PBXTargetDependency;
 			target = 915945992C28372D003D2AC0 /* ambilighthue */;
 			targetProxy = 915945AB2C28372E003D2AC0 /* PBXContainerItemProxy */;
-		};
-		915945B62C28372E003D2AC0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 915945992C28372D003D2AC0 /* ambilighthue */;
-			targetProxy = 915945B52C28372E003D2AC0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -579,7 +478,7 @@
 		};
 		915945BF2C28372E003D2AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 680CBC4983EDC58AD35FB071 /* Pods-ambilighthue.debug.xcconfig */;
+			baseConfigurationReference = F3B7543FE67F08AB0837CF1D /* Pods-ambilighthue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -591,6 +490,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ambilight Hue Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -608,7 +509,7 @@
 		};
 		915945C02C28372E003D2AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC2D012C3F10C961477315A6 /* Pods-ambilighthue.release.xcconfig */;
+			baseConfigurationReference = 772E1536E5DDA402B6FC04F0 /* Pods-ambilighthue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -620,6 +521,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ambilight Hue Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -637,7 +540,7 @@
 		};
 		915945C22C28372E003D2AC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11857D2D3CCE1541EA90D739 /* Pods-ambilighthueTests.debug.xcconfig */;
+			baseConfigurationReference = 38C47B317CB7F7CDD0B7F9AA /* Pods-ambilighthueTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -657,7 +560,7 @@
 		};
 		915945C32C28372E003D2AC0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91DDB082E3690D4F9AF3B8A0 /* Pods-ambilighthueTests.release.xcconfig */;
+			baseConfigurationReference = DC2F8D547D974DE200AB41E8 /* Pods-ambilighthueTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -672,44 +575,6 @@
 				TARGETED_DEVICE_FAMILY = 3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ambilighthue.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ambilighthue";
 				TVOS_DEPLOYMENT_TARGET = 17.5;
-			};
-			name = Release;
-		};
-		915945C52C28372E003D2AC0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 749F0F6BD3D907899A18DBB7 /* Pods-ambilighthue-ambilighthueUITests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MPM882X566;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = ambilighthue;
-			};
-			name = Debug;
-		};
-		915945C62C28372E003D2AC0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CECB2EA5EFB9F1968205CD0 /* Pods-ambilighthue-ambilighthueUITests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = MPM882X566;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.graffy.ambilighthueUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TEST_TARGET_NAME = ambilighthue;
 			};
 			name = Release;
 		};
@@ -739,15 +604,6 @@
 			buildConfigurations = (
 				915945C22C28372E003D2AC0 /* Debug */,
 				915945C32C28372E003D2AC0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		915945C42C28372E003D2AC0 /* Build configuration list for PBXNativeTarget "ambilighthueUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				915945C52C28372E003D2AC0 /* Debug */,
-				915945C62C28372E003D2AC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
