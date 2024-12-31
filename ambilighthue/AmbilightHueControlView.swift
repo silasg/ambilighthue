@@ -55,5 +55,5 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
 
 
 #Preview {
-    AmbilightHueControlView(ambilightTv: AmbilightTv(config: AmbilightTvConfig(), session: nil))
+    AmbilightHueControlView(ambilightTv: AmbilightTv(config: AmbilightTvConfig(), session: nil)) // todo use mock
 }

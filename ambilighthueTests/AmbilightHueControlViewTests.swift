@@ -10,15 +10,12 @@ import ViewInspector
 @testable import ambilighthue
 import SwiftUI
 
+
+
 final class AmbilightHueControlViewTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
     override func tearDownWithError() throws {
@@ -26,20 +23,91 @@ final class AmbilightHueControlViewTests: XCTestCase {
     }
 
     
-    func testView() throws {
-        // UI tests must launch the application that they test.
-        let view = AmbilightHueControlView(ambilightTv: AmbilightTv(config: AmbilightTvConfig(), session: nil)) // TODO: mock ambilightTv
+    func test_view_updates_state_on_init() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        
+        // act
+        let _ = AmbilightHueControlView(ambilightTv: mockedTv)
+        
+        // arrange
+        XCTAssertEqual(mockedTv.currentState, .disabled)
+    }
+    
+    func test_off_button_has_image_if_ambilighttv_is_disabled() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        
+        // act
         let button = try view.inspect().find(button: "Off")
-        let style = try button.buttonStyle()
-        let images = button.findAll(ViewType.Image.self)
         
-        XCTAssert(style is CardButtonStyle)
-       XCTAssertNotNil(button)
-      //  XCTAssert(images.count > 0)
+        // arrange
+        XCTAssert(button.findAll(ViewType.Image.self).count > 0)
+    }
+    
+    func test_on_button_has_image_if_ambilighttv_is_enabled() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
         
-       
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // act
+        let button = try view.inspect().find(button: "On")
+        
+        // arrange
+        XCTAssert(button.findAll(ViewType.Image.self).count > 0)
+    }
+    
+    func test_off_button_tap_disables_ambilight() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        let button = try view.inspect().find(button: "Off")
+        
+        // act
+        try button.tap()
+        
+        // arrange
+        XCTAssertEqual(mockedTv.currentState, AmbilightHueMode.disabled)
+    }
+    
+    func test_on_button_tap_enables_ambilight() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        let button = try view.inspect().find(button: "On")
+        
+        // act
+        try button.tap()
+        
+        // arrange
+        XCTAssertEqual(mockedTv.currentState, AmbilightHueMode.enabled)
+    }
+    
+    func test_stack_has_angulargradient_background_if_ambilighttv_is_enabled() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
+        
+        // act
+        let backgroundGradients = backgroundGroup.findAll(AngularGradient.self)
+        
+        // arrange
+        XCTAssertEqual(backgroundGradients.count, 1)
+    }
+    
+    func test_stack_has_no_angulargradient_background_if_ambilighttv_is_disabled() throws {
+        // arrange
+        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
+        
+        // act
+        let backgroundGradients = backgroundGroup.findAll(AngularGradient.self)
+        
+        // arrange
+        XCTAssertEqual(backgroundGradients.count, 0)
     }
 
 }
