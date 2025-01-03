@@ -5,13 +5,9 @@
 //  Created by Silas Graffy on 31.12.24.
 //
 
-
-import XCTest
-import ViewInspector
-@testable import ambilighthue
 import SwiftUI
 
-class AmbilightTvMock: AmbilightTvProtocol {
+class AmbilightTvStub: AmbilightTvProtocol {
     init(stateToBeReturnedByUpdateState: ambilighthue.AmbilightHueMode?) {
         self.stateToBeReturnedByUpdateState = stateToBeReturnedByUpdateState
     }

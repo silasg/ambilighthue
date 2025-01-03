@@ -25,7 +25,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_view_updates_state_on_init() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
         
         // act
         let _ = AmbilightHueControlView(ambilightTv: mockedTv)
@@ -36,7 +36,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_off_button_has_image_if_ambilighttv_is_disabled() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         
         // act
@@ -48,7 +48,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_on_button_has_image_if_ambilighttv_is_enabled() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         
         // act
@@ -60,7 +60,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_off_button_tap_disables_ambilight() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         let button = try view.inspect().find(button: "Off")
         
@@ -73,7 +73,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_on_button_tap_enables_ambilight() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         let button = try view.inspect().find(button: "On")
         
@@ -86,7 +86,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_stack_has_angulargradient_background_if_ambilighttv_is_enabled() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
         
@@ -99,7 +99,7 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_stack_has_no_angulargradient_background_if_ambilighttv_is_disabled() throws {
         // arrange
-        let mockedTv = AmbilightTvMock(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
         let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
         
