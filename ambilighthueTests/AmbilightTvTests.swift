@@ -93,8 +93,7 @@ final class AmbilightTvTests: XCTestCase {
     }
     
     private func createAmbilightTvForTest() -> AmbilightTv {
-        let config = AmbilightTvConfig()
-        config.configure(tvIp: AmbilightTvTests.tvip, username: "usr", password: "pwd")
+        let config = AmbilightTvConfig.configure(tvIp: AmbilightTvTests.tvip, username: "usr", password: "pwd")
         return AmbilightTv(config: config, session: AmbilightTvTests.sessionManager)
     }
 }

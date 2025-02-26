@@ -28,10 +28,7 @@ struct ambilightHueApp: App {
     let tvIp = "TV_IP"
     
     func configure() -> AmbilightTvConfig {
-        let config = AmbilightTvConfig();
-        if (!config.isConfigured) {
-            config.configure(tvIp: tvIp, username: usr, password: pwd);
-        }
+        let config = AmbilightTvConfig.isConfigured ?? AmbilightTvConfig.configure(tvIp: tvIp, username: usr, password: pwd)
         return config;
     }
     

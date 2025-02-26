@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import CommonCrypto
 
 enum AmbilightHueMode {
     case enabled, disabled
@@ -17,9 +18,82 @@ protocol AmbilightTvProtocol: ObservableObject {
     func setAmbilightHueMode(newMode: AmbilightHueMode)
     var currentState: AmbilightHueMode? { get }
     var log: String { get }
+    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress
+    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig
+}
+
+class AmbilightTvPairingInProgress {
+    var tvIp: String
+    var deviceId: String
+    var authKey: String
+    var timeStamp: Int
+    
+    init(tvIp: String, deviceId: String, authKey: String, timeStamp: Int) {
+        self.tvIp = tvIp
+        self.deviceId = deviceId
+        self.authKey = authKey
+        self.timeStamp = timeStamp
+    }
 }
 
 class AmbilightTv : AmbilightTvProtocol, ObservableObject{
+    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
+        let deviceId = createDeviceId()
+        
+        // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
+        
+        // will return: {"error_id":"SUCCESS","error_text":"Authorization required","auth_key":"a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361","timestamp":55285,"timeout":60}
+        
+        return AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "", authKey: "", timeStamp: 0)
+    }
+    
+    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig {
+        
+        let user = pairing.deviceId
+        let pass = pairing.authKey
+        let tvIp = pairing.tvIp
+        
+        let signature = createSignature(toSign: String(pairing.timeStamp) + tvPin)
+        
+        //try up to 10 times
+        // curl --insecure -v --trace-ascii debug.log --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
+        
+        
+        return AmbilightTvConfig.configure(tvIp: tvIp, username: user, password: pass)
+    }
+    
+    private static func createDeviceId() -> String {
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            let length = 16
+            var deviceId = ""
+            
+            for _ in 0..<length {
+                let randomIndex = Int(arc4random_uniform(UInt32(characters.count)))
+                let randomCharacter = characters[characters.index(characters.startIndex, offsetBy: randomIndex)]
+                deviceId.append(randomCharacter)
+            }
+            
+            return deviceId
+        }
+
+        private static func createSignature(toSign: String) -> String? {
+            let secretKey: String = "oEC9Uhg5xbg566mpYPjhoWUwFtFAwTFoTW1By0vaOD4="
+            guard let keyData = Data(base64Encoded: secretKey),
+                  let toSignData = toSign.data(using: .utf8) else {
+                return nil
+            }
+            
+            var hmac = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+            keyData.withUnsafeBytes { keyBytes in
+                toSignData.withUnsafeBytes { toSignBytes in
+                    CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), keyBytes.baseAddress, keyData.count, toSignBytes.baseAddress, toSignData.count, &hmac)
+                }
+            }
+            
+            let hmacData = Data(hmac)
+            return hmacData.base64EncodedString()
+        }
+    
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
    

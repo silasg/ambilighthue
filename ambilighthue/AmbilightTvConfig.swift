@@ -7,22 +7,27 @@
 
 
 import Foundation
-import Alamofire
+ class AmbilightTvConfig {
+     let defaults = UserDefaults.standard
 
-class AmbilightTvConfig {
-    let defaults = UserDefaults.standard
-
-    func configure(tvIp: String, username: String, password: String) {
-        defaults.set(tvIp, forKey: "tvIp")
-        defaults.set(username, forKey: "username")
-        defaults.set(password, forKey: "password")
+     static func configure(tvIp: String, username: String, password: String) -> AmbilightTvConfig {
+        UserDefaults.standard.set(tvIp, forKey: "tvIp")
+        UserDefaults.standard.set(username, forKey: "username")
+        UserDefaults.standard.set(password, forKey: "password")
+        return AmbilightTvConfig()
     }
     
-    var isConfigured: Bool {
-        return defaults.string(forKey: "tvIp") != nil && defaults.string(forKey: "username") != nil && defaults.string(forKey: "password") != nil
+    static var isConfigured: AmbilightTvConfig? {
+        if (UserDefaults.standard.string(forKey: "tvIp") != nil && UserDefaults.standard.string(forKey: "username") != nil && UserDefaults.standard.string(forKey: "password") != nil)
+        {
+            return AmbilightTvConfig()
+        }
+        return nil
     }
     
     var tvIp: String { return defaults.string(forKey: "tvIp").unsafelyUnwrapped }
     var username: String { return defaults.string(forKey: "username").unsafelyUnwrapped }
     var password: String { return defaults.string(forKey: "password").unsafelyUnwrapped }
+    
+    private init() {}
 }
