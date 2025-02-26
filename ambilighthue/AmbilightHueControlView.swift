@@ -19,6 +19,12 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
     
   var body: some View {
     VStack(spacing: 20) {
+        HStack{
+            Spacer()
+            Button(action: {ambilightTv.setAmbilightHueMode(newMode: AmbilightHueMode.disabled)}) // TODO: change action
+            {Image(systemName: "gearshape.fill").padding()}
+                .buttonStyle(CardButtonStyle())
+        }
         Spacer()
         Text("Ambilight Hue Control")
         
