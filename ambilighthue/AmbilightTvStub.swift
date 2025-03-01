@@ -16,16 +16,17 @@ class AmbilightTvStub: AmbilightTvProtocol {
     
     var isConfigured: Bool { return config != nil }
     
-    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
+    func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
         return AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "mocked device id", authKey: "mocked auth key", timeStamp: 1)
     }
     
-    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig {
-        return AmbilightTvConfig.configure(tvIp: pairing.tvIp, username: pairing.deviceId, password: pairing.authKey)
+    func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {
+        config = AmbilightTvConfig.configure(tvIp: pairing.tvIp, username: pairing.deviceId, password: pairing.authKey)
     }
     
-    init(stateToBeReturnedByUpdateState: ambilighthue.AmbilightHueMode?) {
+    init(stateToBeReturnedByUpdateState: ambilighthue.AmbilightHueMode?, config: AmbilightTvConfig? = nil) {
         self.stateToBeReturnedByUpdateState = stateToBeReturnedByUpdateState
+        self.config = config
     }
     
     func updateState() {

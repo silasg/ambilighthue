@@ -39,7 +39,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         }
     }
     
-    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
+    func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
         let deviceId = createDeviceId()
         
         // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
@@ -49,7 +49,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         return AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "", authKey: "", timeStamp: 0)
     }
     
-    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig {
+    func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {
         
         let user = pairing.deviceId
         let pass = pairing.authKey
@@ -61,10 +61,10 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         // curl --insecure -v --trace-ascii debug.log --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
         
         
-        return AmbilightTvConfig.configure(tvIp: tvIp, username: user, password: pass)
+        config = AmbilightTvConfig.configure(tvIp: tvIp, username: user, password: pass)
     }
     
-    private static func createDeviceId() -> String {
+    private func createDeviceId() -> String {
             let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
             let length = 16
             var deviceId = ""
@@ -78,7 +78,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
             return deviceId
         }
 
-        private static func createSignature(toSign: String) -> String? {
+        private func createSignature(toSign: String) -> String? {
             let secretKey: String = "oEC9Uhg5xbg566mpYPjhoWUwFtFAwTFoTW1By0vaOD4="
             guard let keyData = Data(base64Encoded: secretKey),
                   let toSignData = toSign.data(using: .utf8) else {

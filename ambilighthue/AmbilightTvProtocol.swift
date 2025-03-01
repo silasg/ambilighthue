@@ -17,8 +17,8 @@ protocol AmbilightTvProtocol: ObservableObject {
     var log: String { get }
     var isConfigured: Bool { get }
     var config: AmbilightTvConfig? { get }
-    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress
-    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig
+    func startPairing(tvIp: String) -> AmbilightTvPairingInProgress
+    func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress)
     func resetPairing()
 }
 

@@ -10,7 +10,11 @@ import ViewInspector
 @testable import ambilighthue
 import SwiftUI
 
-
+extension UIHostingController {
+  fileprivate func forceRenderToTriggerUpdateOnAppear() {
+    _render(seconds: 0)
+  }
+}
 
 final class AmbilightHueControlViewTests: XCTestCase {
 
@@ -22,13 +26,14 @@ final class AmbilightHueControlViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    let config: AmbilightTvConfig = AmbilightTvConfig.configure(tvIp: "ip", username: "username", password: "password")
     
     func test_view_updates_state_on_init() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled, config: config)
         
         // act
-        let _ = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: AmbilightHueControlView(ambilightTv: mockedTv)).forceRenderToTriggerUpdateOnAppear()
         
         // arrange
         XCTAssertEqual(mockedTv.currentState, .disabled)
@@ -36,8 +41,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_off_button_has_image_if_ambilighttv_is_disabled() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         
         // act
         let button = try view.inspect().find(button: "Off")
@@ -48,8 +54,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_on_button_has_image_if_ambilighttv_is_enabled() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         
         // act
         let button = try view.inspect().find(button: "On")
@@ -60,8 +67,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_off_button_tap_disables_ambilight() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         let button = try view.inspect().find(button: "Off")
         
         // act
@@ -73,8 +81,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_on_button_tap_enables_ambilight() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         let button = try view.inspect().find(button: "On")
         
         // act
@@ -86,8 +95,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_stack_has_angulargradient_background_if_ambilighttv_is_enabled() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .enabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
         
         // act
@@ -99,8 +109,9 @@ final class AmbilightHueControlViewTests: XCTestCase {
     
     func test_stack_has_no_angulargradient_background_if_ambilighttv_is_disabled() throws {
         // arrange
-        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled)
+        let mockedTv = AmbilightTvStub(stateToBeReturnedByUpdateState: .disabled, config: config)
         let view = AmbilightHueControlView(ambilightTv: mockedTv)
+        UIHostingController(rootView: view).forceRenderToTriggerUpdateOnAppear()
         let backgroundGroup = try view.inspect().find(ViewType.VStack.self).background().group()
         
         // act

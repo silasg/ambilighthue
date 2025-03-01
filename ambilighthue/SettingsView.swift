@@ -14,6 +14,8 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
     @State private var inputDisabled = ""
     @State private var inputPin = ""
     @State private var showResetAlert = false
+    @State private var isPairing = false
+    @State private var pairingProgress: AmbilightTvPairingInProgress?
     @FocusState private var isIpInputFocused: Bool
     @Environment(\.dismiss) var dismiss
     
@@ -35,11 +37,27 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
                     .keyboardType(.numbersAndPunctuation)
                     .focused($isIpInputFocused)
                     .onChange(of: isIpInputFocused, initial: false) { focused, arguments  in
-                        if !focused {
+                        if !focused && ambilightTv.config?.tvIp != inputIp {
+                            pairingProgress = ambilightTv.startPairing(tvIp: inputIp)
+                            isPairing = true
                             // TODO: compare with current IP and in case of change start pairing and ask for pin
                             print("Text changed to: \(inputIp) - \(arguments)")
                         }
                     }
+                    .alert("Enter PIN", isPresented: $isPairing) {
+                        TextField("", text: $inputPin).keyboardType(.numbersAndPunctuation)
+                            Button("OK", action: {
+                                    ambilightTv.confirmPairing(tvPin: inputPin, pairing: pairingProgress!)
+                                   
+                            })
+                            Button("Cancel", role: .cancel) {
+                                inputIp = ambilightTv.config?.tvIp ?? ""
+                                isPairing = false
+                            }
+                        }
+                        message: {
+                            Text("Please enter the PIN shown at your TV within the next minute")
+                        }
             }
             HStack {
                 Label("TV API user", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
