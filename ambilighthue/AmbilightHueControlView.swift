@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
     let menuItems = [("Off", AmbilightHueMode.disabled), ("On", AmbilightHueMode.enabled)]
     
@@ -17,28 +19,22 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
         ambilightTv.updateState()
     }
     
-    @State private var showingAlert = false
-    @State private var inputText = ""
+    @State private var showingSettings = false
     
   var body: some View {
     VStack(spacing: 20) {
         HStack{
             Spacer()
-            Button(action: { showingAlert.toggle() })
+            Button(action: { showingSettings.toggle() })
             {Image(systemName: "gearshape.fill").padding()}
-                .alert("Enter TV IP address.", isPresented: $showingAlert) {
-                        TextField("", text: $inputText)
-                        .keyboardType(.numbersAndPunctuation)
-                        .submitLabel(.done)
-                    Button("OK", role: .cancel) {}
-                    } message: {
-                        Text("Please enter your TV's IP address (not hostname). You can find it in Settings > Network & Internet > Choose the connected Wi-Fi network or using your network router's management interface.")
-                    }
+                .sheet(isPresented: $showingSettings) {
+                            SettingsView()
+                        }
                 .buttonStyle(CardButtonStyle())
                 
         }
         Spacer()
-        Text("Ambilight Hue Control")
+        Text("Ambilight Hue Control").font(.headline)
         
         ForEach(0..<menuItems.count, id: \.self) { (index) in
             let (label, state) = menuItems[index]
