@@ -9,34 +9,36 @@ import Foundation
 import Alamofire
 import CommonCrypto
 
-enum AmbilightHueMode {
-    case enabled, disabled
-}
-
-protocol AmbilightTvProtocol: ObservableObject {
-    func updateState()
-    func setAmbilightHueMode(newMode: AmbilightHueMode)
-    var currentState: AmbilightHueMode? { get }
-    var log: String { get }
-    static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress
-    static func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) -> AmbilightTvConfig
-}
-
-class AmbilightTvPairingInProgress {
-    var tvIp: String
-    var deviceId: String
-    var authKey: String
-    var timeStamp: Int
-    
-    init(tvIp: String, deviceId: String, authKey: String, timeStamp: Int) {
-        self.tvIp = tvIp
-        self.deviceId = deviceId
-        self.authKey = authKey
-        self.timeStamp = timeStamp
-    }
-}
-
 class AmbilightTv : AmbilightTvProtocol, ObservableObject{
+    func resetPairing() {
+        config = nil
+        
+    }
+    
+    
+    @Published var log = "(no log)"
+    @Published var currentState: AmbilightHueMode? = nil
+   
+    var tvIp: String
+    var credential: URLCredential
+    var session: Session
+    var config: AmbilightTvConfig?
+    var isConfigured: Bool { return config != nil }
+    
+    init(config: AmbilightTvConfig, session: Session?) {
+        self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
+        self.config = config
+        self.tvIp = config.tvIp
+        if (session == nil) {
+            let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
+                self.tvIp: DisabledTrustEvaluator()
+                ]
+            self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
+        } else {
+            self.session = session.unsafelyUnwrapped
+        }
+    }
+    
     static func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
         let deviceId = createDeviceId()
         
@@ -93,26 +95,6 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
             let hmacData = Data(hmac)
             return hmacData.base64EncodedString()
         }
-    
-    @Published var log = "(no log)"
-    @Published var currentState: AmbilightHueMode? = nil
-   
-    var tvIp: String
-    var credential: URLCredential
-    var session: Session
-    
-    init(config: AmbilightTvConfig, session: Session?) {
-        self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
-        self.tvIp = config.tvIp
-        if (session == nil) {
-            let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
-                self.tvIp: DisabledTrustEvaluator()
-                ]
-            self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
-        } else {
-            self.session = session.unsafelyUnwrapped
-        }
-    }
     
     func updateState() {
         session.request("https://\(tvIp):1926/6/HueLamp/power", method: .get)

@@ -8,14 +8,18 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsView<T: AmbilightTvProtocol>: View {
+    @StateObject private var ambilightTv: T
     @State private var inputIp = ""
-    @State private var inputUser = ""
-    @State private var inputPass = ""
+    @State private var inputDisabled = ""
     @State private var inputPin = ""
     @State private var showResetAlert = false
-    @FocusState private var isFocused: Bool
+    @FocusState private var isIpInputFocused: Bool
     @Environment(\.dismiss) var dismiss
+    
+    init(ambilightTv: T) {
+        _ambilightTv = StateObject(wrappedValue: ambilightTv)
+    }
     
     var body: some View {
         VStack() {
@@ -29,8 +33,8 @@ struct SettingsView: View {
                 Label("TV IP", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
                 TextField("TV IP Address", text: $inputIp)
                     .keyboardType(.numbersAndPunctuation)
-                    .focused($isFocused)
-                    .onChange(of: isFocused, initial: false) { focused, arguments  in
+                    .focused($isIpInputFocused)
+                    .onChange(of: isIpInputFocused, initial: false) { focused, arguments  in
                         if !focused {
                             // TODO: compare with current IP and in case of change start pairing and ask for pin
                             print("Text changed to: \(inputIp) - \(arguments)")
@@ -39,11 +43,11 @@ struct SettingsView: View {
             }
             HStack {
                 Label("TV API user", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
-                TextField("TV API user will be shown here", text: $inputUser).disabled(true)
+                TextField(ambilightTv.config?.username ?? "TV API user will be shown here", text: $inputDisabled).disabled(true)
             }
             HStack {
                 Label("TV API secret", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
-                TextField("TV API secret will be shown here", text: $inputPass).disabled(true)
+                TextField(ambilightTv.config?.password ?? "TV API secret will be shown here", text: $inputDisabled).disabled(true)
             }
 
             HStack() {
@@ -64,13 +68,17 @@ struct SettingsView: View {
             }
             Spacer()
         }.padding(.horizontal, 100)
+            .onAppear() {
+                if (ambilightTv.isConfigured) {
+                    inputIp = ambilightTv.config!.tvIp
+                }
+            }
     }
     
     func resetSettings() {
         inputIp = ""
-        inputUser = ""
-        inputPass = ""
         inputPin = ""
         showResetAlert = false
+        ambilightTv.resetPairing()
     }
 }

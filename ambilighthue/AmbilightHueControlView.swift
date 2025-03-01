@@ -16,11 +16,11 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
     
     init(ambilightTv: T) {
         _ambilightTv = StateObject(wrappedValue: ambilightTv)
-        ambilightTv.updateState()
     }
     
     @State private var showingSettings = false
-    
+    @State private var askSettings = false
+   
   var body: some View {
     VStack(spacing: 20) {
         HStack{
@@ -28,7 +28,7 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
             Button(action: { showingSettings.toggle() })
             {Image(systemName: "gearshape.fill").padding()}
                 .sheet(isPresented: $showingSettings) {
-                            SettingsView()
+                    SettingsView(ambilightTv:ambilightTv)
                         }
                 .buttonStyle(CardButtonStyle())
                 
@@ -49,6 +49,7 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
                 }
             }
             .padding()
+            .disabled(!ambilightTv.isConfigured)
             .buttonStyle(CardButtonStyle())
         }
         
@@ -59,9 +60,29 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
     .background(Group {
         if ambilightTv.currentState == .enabled {
             AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
-        }}.ignoresSafeArea()
+        }}
+        .ignoresSafeArea())
+    .onAppear {
+        print("is configured \(ambilightTv.isConfigured)")
+        if (ambilightTv.isConfigured) {
+            ambilightTv.updateState()
+        }
+        else {
+            askSettings = true
+        }
+    }
+    .alert(isPresented: $askSettings) {
+        Alert(
+            title: Text("TV not configured"),
+            message: Text("The connection to TV needs to be configured to use this app. Do you want to configure it now?"),
+            primaryButton: .default(Text("Yes")) {
+                showingSettings.toggle()
+            },
+            secondaryButton: .cancel(Text("No")) {
+                
+            }
         )
-    
+    }
   }
     
    
