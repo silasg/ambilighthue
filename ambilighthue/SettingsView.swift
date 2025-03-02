@@ -15,7 +15,6 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
     @State private var inputPin = ""
     @State private var showResetAlert = false
     @State private var isPairing = false
-    @State private var pairingProgress: AmbilightTvPairingInProgress?
     @FocusState private var isIpInputFocused: Bool
     @Environment(\.dismiss) var dismiss
     
@@ -38,20 +37,21 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
                     .focused($isIpInputFocused)
                     .onChange(of: isIpInputFocused, initial: false) { focused, arguments  in
                         if !focused && ambilightTv.config?.tvIp != inputIp {
-                            pairingProgress = ambilightTv.startPairing(tvIp: inputIp)
-                            isPairing = true
-                            // TODO: compare with current IP and in case of change start pairing and ask for pin
-                            print("Text changed to: \(inputIp) - \(arguments)")
+                            ambilightTv.startPairing(tvIp: inputIp)
                         }
                     }
+                    .onChange(of: ambilightTv.pairingInProgress != nil, { oldValue, newValue in
+                        isPairing = true
+                    })
                     .alert("Enter PIN", isPresented: $isPairing) {
                         TextField("", text: $inputPin).keyboardType(.numbersAndPunctuation)
                             Button("OK", action: {
-                                    ambilightTv.confirmPairing(tvPin: inputPin, pairing: pairingProgress!)
-                                   
+                                ambilightTv.confirmPairing(tvPin: inputPin, pairing: ambilightTv.pairingInProgress!)
+                                isPairing = false
                             })
                             Button("Cancel", role: .cancel) {
                                 inputIp = ambilightTv.config?.tvIp ?? ""
+                                ambilightTv.resetPairing()
                                 isPairing = false
                             }
                         }

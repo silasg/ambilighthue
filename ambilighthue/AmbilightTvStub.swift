@@ -8,6 +8,8 @@
 import SwiftUI
 
 class AmbilightTvStub: AmbilightTvProtocol {
+    var pairingInProgress: AmbilightTvPairingInProgress?
+    
     func resetPairing() {
         config = nil
     }
@@ -16,8 +18,8 @@ class AmbilightTvStub: AmbilightTvProtocol {
     
     var isConfigured: Bool { return config != nil }
     
-    func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
-        return AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "mocked device id", authKey: "mocked auth key", timeStamp: 1)
+    func startPairing(tvIp: String)  {
+        
     }
     
     func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {

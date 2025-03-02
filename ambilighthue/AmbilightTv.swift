@@ -23,6 +23,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
     var credential: URLCredential
     var session: Session
     var config: AmbilightTvConfig?
+    var pairingInProgress: AmbilightTvPairingInProgress?
     var isConfigured: Bool { return config != nil }
     
     init(config: AmbilightTvConfig, session: Session?) {
@@ -39,14 +40,48 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         }
     }
     
-    func startPairing(tvIp: String) -> AmbilightTvPairingInProgress {
+    struct PairingInfo: Decodable {
+        let timestamp: Int
+        let error_id: String
+        let auth_key: String
+    }
+    
+    func startPairing(tvIp: String) {
+        pairingInProgress = nil
         let deviceId = createDeviceId()
+        let parameters: Parameters = [
+            "scope": ["read", "write", "control"],
+            "device": [
+                "device_name": "heliotrope", "device_os": "Android", "app_name": "Ambiligt Hue Control for tvOS", "type": "native", "app_id": "app.id", "id": "\(deviceId)"
+            ]
+        ]
         
         // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
+        session.request("https://\(tvIp):1926/6/pair/request", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
+            .validate()
+            .responseDecodable(of: PairingInfo.self) { r in
+                switch r.result {
+                    
+                // will return: {"error_id":"SUCCESS","error_text":"Authorization required","auth_key":"a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361","timestamp":55285,"timeout":60}
+                        
+                case .success(let value):
+                    if (value.error_id == "SUCCESS") {
+                        self.log = "Pairing requested"
+                        self.credential = URLCredential(user: deviceId, password: value.auth_key, persistence: .forSession) // TODO: extract method
+                        self.pairingInProgress = AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: deviceId, authKey: value.auth_key, timeStamp: value.timestamp)
+                        
+                    } else {
+                        self.log = "Pairing request failed with error: \(value.error_id)"
+                    }
+                    
+                    
+                case .failure(let err):
+                    self.log = err.localizedDescription
+                
+                }
+        }
         
-        // will return: {"error_id":"SUCCESS","error_text":"Authorization required","auth_key":"a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361","timestamp":55285,"timeout":60}
-        
-        return AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "", authKey: "", timeStamp: 0)
+    
     }
     
     func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {
