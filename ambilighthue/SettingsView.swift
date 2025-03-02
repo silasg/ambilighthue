@@ -41,7 +41,9 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
                         }
                     }
                     .onChange(of: ambilightTv.pairingInProgress != nil, { oldValue, newValue in
-                        isPairing = true
+                        if ambilightTv.pairingInProgress != nil {
+                            isPairing = true
+                        }
                     })
                     .alert("Enter PIN", isPresented: $isPairing) {
                         TextField("", text: $inputPin).keyboardType(.numbersAndPunctuation)

@@ -25,6 +25,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
     var config: AmbilightTvConfig?
     var pairingInProgress: AmbilightTvPairingInProgress?
     var isConfigured: Bool { return config != nil }
+    let AppName = "AmbiligtHue"
     
     init(config: AmbilightTvConfig, session: Session?) {
         self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
@@ -52,7 +53,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         let parameters: Parameters = [
             "scope": ["read", "write", "control"],
             "device": [
-                "device_name": "heliotrope", "device_os": "Android", "app_name": "Ambiligt Hue Control for tvOS", "type": "native", "app_id": "app.id", "id": "\(deviceId)"
+                "device_name": "heliotrope", "device_os": "Android", "app_name": AppName, "type": "native", "app_id": "app.id", "id": deviceId
             ]
         ]
         
@@ -95,8 +96,34 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         //try up to 10 times
         // curl --insecure -v --trace-ascii debug.log --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
         
+        let parameters: [String: Any] = [
+            "auth": [
+                "auth_AppId": "1",
+                "pin": tvPin,
+                "auth_timestamp": pairing.timeStamp,
+                "auth_signature": signature as Any
+            ],
+            "device": [
+                "device_name": "heliotrope",
+                "device_os": "Android",
+                "app_name": self.AppName,
+                "type": "native",
+                "app_id": "app.id",
+                "id": user
+            ]
+        ]
         
-        config = AmbilightTvConfig.configure(tvIp: tvIp, username: user, password: pass)
+        session.request("https://\(tvIp):1926/6/pair/grant", method: .post,
+                        parameters: parameters, encoding: JSONEncoding.default)
+        .authenticate(with: credential).response { response in
+            switch response.result {
+            case .success( _):
+                self.config = AmbilightTvConfig.configure(tvIp: tvIp, username: user, password: pass)
+            case .failure(let error):
+                self.log = error.localizedDescription
+            }
+            debugPrint(response)
+        }
     }
     
     private func createDeviceId() -> String {
@@ -113,12 +140,10 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
             return deviceId
         }
 
-        private func createSignature(toSign: String) -> String? {
+        private func createSignature(toSign: String) -> String {
             let secretKey: String = "oEC9Uhg5xbg566mpYPjhoWUwFtFAwTFoTW1By0vaOD4="
             guard let keyData = Data(base64Encoded: secretKey),
-                  let toSignData = toSign.data(using: .utf8) else {
-                return nil
-            }
+                  let toSignData = toSign.data(using: .utf8) else { return "" }
             
             var hmac = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
             keyData.withUnsafeBytes { keyBytes in
