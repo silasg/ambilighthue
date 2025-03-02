@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 @main
 struct AppLauncher {
@@ -23,17 +24,10 @@ struct TestApp: App {
     }
 }
 struct ambilightHueApp: App {
-    let usr = "REDACTED"
-    let pwd = "REDACTED"
-    let tvIp = "TV_IP"
-    
-    func configure() -> AmbilightTvConfig {
-        let config = AmbilightTvConfig.isConfigured ?? AmbilightTvConfig.configure(tvIp: tvIp, username: usr, password: pwd)
-        return config;
-    }
     
     var body: some Scene {
-        let ambilightTv = AmbilightTv(config: configure(), session: nil)
+            
+        let ambilightTv = AmbilightTv(config: AmbilightTvConfig.isConfigured, sessionFac: SessionFactorty())
         
         WindowGroup {
             AmbilightHueControlView(ambilightTv: ambilightTv)

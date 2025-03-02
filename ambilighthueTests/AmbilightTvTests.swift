@@ -12,8 +12,14 @@ import Alamofire
 
 final class AmbilightTvTests: XCTestCase {
 
+    private class MockSessionFactory: SessionFactoryProtocol {
+        func makeSession(tvIp: String) -> Alamofire.Session {
+            return Alamofire.Session(configuration: configuration)
+        }
+    }
+    
     static let configuration = URLSessionConfiguration.af.default;
-    static let sessionManager = Alamofire.Session(configuration: configuration);
+    static let sessionFac: SessionFactoryProtocol = MockSessionFactory();
     static let tvip = "mocked.tv";
     static let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!;
     
@@ -94,7 +100,7 @@ final class AmbilightTvTests: XCTestCase {
     
     private func createAmbilightTvForTest() -> AmbilightTv {
         let config = AmbilightTvConfig.configure(tvIp: AmbilightTvTests.tvip, username: "usr", password: "pwd")
-        return AmbilightTv(config: config, session: AmbilightTvTests.sessionManager)
+        return AmbilightTv(config: config, sessionFac: AmbilightTvTests.sessionFac)
     }
 }
 

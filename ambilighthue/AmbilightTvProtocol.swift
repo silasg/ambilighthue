@@ -27,3 +27,6 @@ enum AmbilightHueMode {
     case enabled, disabled
 }
 
+protocol SessionFactoryProtocol {
+    func makeSession(tvIp: String) -> Session
+}

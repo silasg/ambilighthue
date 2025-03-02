@@ -9,37 +9,51 @@ import Foundation
 import Alamofire
 import CommonCrypto
 
+class SessionFactorty: SessionFactoryProtocol {
+    static var tvIp: String = ""
+    static var session: Session?
+    func makeSession(tvIp: String) -> Session {
+        SessionFactorty.tvIp = tvIp
+        let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
+            SessionFactorty.tvIp: DisabledTrustEvaluator()
+        ]
+        SessionFactorty.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
+        return SessionFactorty.session!
+    }
+}
+
 class AmbilightTv : AmbilightTvProtocol, ObservableObject{
     func resetPairing() {
+        AmbilightTvConfig.clear()
         config = nil
-        
     }
     
     
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
    
-    var tvIp: String
     var credential: URLCredential
     var session: Session
+    var sessionFactory: SessionFactoryProtocol
     var config: AmbilightTvConfig?
     var pairingInProgress: AmbilightTvPairingInProgress?
     var isConfigured: Bool { return config != nil }
     let AppName = "AmbiligtHue"
+
     
-    init(config: AmbilightTvConfig, session: Session?) {
-        self.credential = URLCredential(user: config.username, password: config.password, persistence: .forSession)
+    init(config: AmbilightTvConfig?, sessionFac: SessionFactoryProtocol) {
         self.config = config
-        self.tvIp = config.tvIp
-        if (session == nil) {
-            let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
-                self.tvIp: DisabledTrustEvaluator()
-                ]
-            self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
+        self.sessionFactory = sessionFac
+        if (config != nil) {
+            self.credential = URLCredential(user: config!.username, password: config!.password, persistence: .forSession)
+            self.session = sessionFac.makeSession(tvIp: config!.tvIp)
         } else {
-            self.session = session.unsafelyUnwrapped
+            self.credential = URLCredential(user: "", password: "", persistence: .forSession)
+            self.session = sessionFac.makeSession(tvIp: "")
         }
     }
+    
+    
     
     struct PairingInfo: Decodable {
         let timestamp: Int
@@ -58,6 +72,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         ]
         
         // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
+        self.session = self.sessionFactory.makeSession(tvIp: tvIp)
         session.request("https://\(tvIp):1926/6/pair/request", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"])
             .validate()
             .responseDecodable(of: PairingInfo.self) { r in
@@ -112,9 +127,9 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
                 "id": user
             ]
         ]
-        
-        session.request("https://\(tvIp):1926/6/pair/grant", method: .post,
-                        parameters: parameters, encoding: JSONEncoding.default)
+        self.session = sessionFactory.makeSession(tvIp: tvIp)
+        self.session.request("https://\(tvIp):1926/6/pair/grant", method: .post,
+                         parameters: parameters, encoding: JSONEncoding.default)
         .authenticate(with: credential).response { response in
             switch response.result {
             case .success( _):
@@ -157,7 +172,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         }
     
     func updateState() {
-        session.request("https://\(tvIp):1926/6/HueLamp/power", method: .get)
+        session.request("https://\(config!.tvIp):1926/6/HueLamp/power", method: .get)
             .authenticate(with: credential)
             .responseString { r in
             switch r.result {
@@ -179,7 +194,7 @@ class AmbilightTv : AmbilightTvProtocol, ObservableObject{
         let powerState = newMode == AmbilightHueMode.enabled ? "On" : "Off"
         let parameters: [String: Any] = ["power": powerState]
         
-        session.request("https://\(tvIp):1926/6/HueLamp/power", method: .post,
+        session.request("https://\(config!.tvIp):1926/6/HueLamp/power", method: .post,
                         parameters: parameters, encoding: JSONEncoding.default)
         .authenticate(with: credential).response { response in
             switch response.result {

@@ -16,6 +16,12 @@ import Foundation
         UserDefaults.standard.set(password, forKey: "password")
         return AmbilightTvConfig()
     }
+     
+     static func clear() {
+          UserDefaults.standard.removeObject(forKey: "tvIp")
+          UserDefaults.standard.removeObject(forKey: "username")
+          UserDefaults.standard.removeObject(forKey: "password")
+     }
     
     static var isConfigured: AmbilightTvConfig? {
         if (UserDefaults.standard.string(forKey: "tvIp") != nil && UserDefaults.standard.string(forKey: "username") != nil && UserDefaults.standard.string(forKey: "password") != nil)
