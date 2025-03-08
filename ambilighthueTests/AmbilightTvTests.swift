@@ -21,7 +21,9 @@ final class AmbilightTvTests: XCTestCase {
     static let configuration = URLSessionConfiguration.af.default;
     static let sessionFac: SessionFactoryProtocol = MockSessionFactory();
     static let tvip = "mocked.tv";
-    static let tvendpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!;
+    static let HuePowerEndpoint = URL(string: "https://\(tvip):1926/6/HueLamp/power")!;
+    static let PairGrantEndpoint = URL(string: "https://\(tvip):1926/6/pair/grant")!;
+    static let PairRequestEndpoint = URL(string: "https://\(tvip):1926/6/pair/request")!;
     
     
     override func setUpWithError() throws {
@@ -36,7 +38,7 @@ final class AmbilightTvTests: XCTestCase {
 
     func test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint() throws {
          // arrange
-        let mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        let mock = Mock(url: AmbilightTvTests.HuePowerEndpoint, contentType: .json, statusCode: 200, data: [
             .get : "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         mock.register()
@@ -53,7 +55,7 @@ final class AmbilightTvTests: XCTestCase {
     
     func test_post_power_on_to_tvendpoint_when_mode_set_to_enabled() throws {
          // arrange
-        var mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: AmbilightTvTests.HuePowerEndpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"Off\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         let expectedBodyArguments = expectation(description: "The body sent to TV to set state to enabled")
@@ -77,7 +79,7 @@ final class AmbilightTvTests: XCTestCase {
     
     func test_post_power_off_to_tvendpoint_when_mode_set_to_disabled() throws {
          // arrange
-        var mock = Mock(url: AmbilightTvTests.tvendpoint, contentType: .json, statusCode: 200, data: [
+        var mock = Mock(url: AmbilightTvTests.HuePowerEndpoint, contentType: .json, statusCode: 200, data: [
             .post : Data(), .get: "{\"power\":\"On\"}".data(using: .utf8).unsafelyUnwrapped
         ])
         let expectedBodyArguments = expectation(description: "The body sent to TV to set state to disabled")
@@ -96,6 +98,45 @@ final class AmbilightTvTests: XCTestCase {
         // assert
         let ambilightHueDisabledExpectation = expectation(for: sut.currentState == Optional(AmbilightHueMode.disabled))
         wait(for: [ expectedBodyArguments, ambilightHueDisabledExpectation], timeout: 5.0)
+    }
+    
+    func test_return_pairing_in_progress_and_set_credentials_when_pairing_requested() throws {
+         // arrange
+        var mock = Mock(url: AmbilightTvTests.PairRequestEndpoint, contentType: .json, statusCode: 200, data: [
+            .post : "{\"error_id\":\"SUCCESS\",\"error_text\":\"Authorization required\",\"auth_key\":\"a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361\",\"timestamp\":55285,\"timeout\":60}".data(using: .utf8).unsafelyUnwrapped
+        ])
+        let expectedBodyArguments = expectation(description: "The body sent to TV to request pairing")
+        struct RequestPars: Decodable {
+            let scope: [String]
+            let device: [String: String]
+        }
+        mock.onRequestHandler = OnRequestHandler(httpBodyType: RequestPars.self, callback: { request, postBodyArguments in
+            if (request.method == .post
+                && postBodyArguments?.scope == ["read", "write", "control"]
+                && postBodyArguments?.device["device_name"] == "heliotrope"
+                && postBodyArguments?.device["device_os"] == "Android"
+                && postBodyArguments?.device["app_name"] == "AmilightHue"
+                && postBodyArguments?.device["type"] == "native"
+                && postBodyArguments?.device["app_id"] == "app.id"
+                // we dont check for device id since it is randomly generated every time and I dont want to make it mockable
+            ) {
+                expectedBodyArguments.fulfill()
+            }
+        })
+        mock.register()
+        
+        let sut = createAmbilightTvForTest()
+        
+        // act
+        sut.startPairing(tvIp: AmbilightTvTests.tvip)
+        
+        // assert
+        let pairingInProgressExpectation = expectation(for: sut.pairingInProgress?.authKey == "a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361"
+                                                       && sut.pairingInProgress?.tvIp == AmbilightTvTests.tvip
+                                                       && sut.pairingInProgress?.timeStamp == 55285)
+                                                       // we dont check for device id since it is randomly generated every time and I dont want to make it mockable
+        let credentialAuthKeySetExpectation = expectation(for: sut.credential != nil && sut.credential?.password == sut.pairingInProgress?.authKey)
+        wait(for: [expectedBodyArguments, pairingInProgressExpectation, credentialAuthKeySetExpectation], timeout: 5.0)
     }
     
     private func createAmbilightTvForTest() -> AmbilightTv {

@@ -23,6 +23,8 @@
         "AmbilightHueControlViewTests\/test_view_updates_state_on_init()",
         "AmbilightTvTests\/test_post_power_off_to_tvendpoint_when_mode_set_to_disabled()",
         "AmbilightTvTests\/test_post_power_on_to_tvendpoint_when_mode_set_to_enabled()",
+        "AmbilightTvTests\/test_return_pairing_in_progress_and_set_credentials_when_pairing_requested()",
+        "AmbilightTvTests\/test_return_pairing_in_progress_when_pairing_requested()",
         "AmbilightTvTests\/test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint()"
       ],
       "target" : {

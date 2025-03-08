@@ -20,21 +20,18 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
     @Published var log = "(no log)"
     @Published var currentState: AmbilightHueMode? = nil
 
-    var credential: URLCredential
+    var credential: URLCredential?
     let session: Session
     var config: AmbilightTvConfig?
     var pairingInProgress: AmbilightTvPairingInProgress?
     var isConfigured: Bool { return config != nil }
-    let AppName = "AmbiligtHue"
+    let AppName = "AmilightHue"
 
     init(config: AmbilightTvConfig?, sessionFac: SessionFactoryProtocol) {
         self.config = config
         self.session = sessionFac.makeSession()
         if config != nil {
-            self.credential = URLCredential(
-                user: config!.username, password: config!.password, persistence: .forSession)
-        } else {
-            self.credential = URLCredential(user: "", password: "", persistence: .forSession)
+            self.setCredential(user: config!.username, pass: config!.password)
         }
     }
 
@@ -59,16 +56,6 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
         ]
 
         // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
-        // AmbilightTv.session = self.sessionFactory.makeSession(tvIp: tvIp)
-        // AmbilightTv.session = self.sessionFactory.makeSession(tvIp: tvIp)
-        //
-        //        let serverTrustPolicies: [String: DisabledTrustEvaluator] = [
-        //            tvIp: DisabledTrustEvaluator()
-        //        ]
-        //        self.session = Session(serverTrustManager: ServerTrustManager(evaluators: serverTrustPolicies))
-        //
-
-        // TODO try https://github.com/Alamofire/Alamofire/issues/1335#issuecomment-756317527
 
        session.request(
             "https://\(tvIp):1926/6/pair/request", method: .post, parameters: parameters,
@@ -83,8 +70,7 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
             case .success(let value):
                 if value.error_id == "SUCCESS" {
                     self.log = "Pairing requested"
-                    self.credential = URLCredential(
-                        user: deviceId, password: value.auth_key, persistence: .forSession)  // TODO: extract method
+                    self.setCredential(user: deviceId, pass: value.auth_key)
                     self.pairingInProgress = AmbilightTvPairingInProgress(
                         tvIp: tvIp, deviceId: deviceId, authKey: value.auth_key,
                         timeStamp: value.timestamp)
@@ -99,6 +85,10 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
             }
         }
 
+    }
+    
+    private func setCredential(user: String, pass: String) {
+        self.credential = URLCredential(user: user, password: pass, persistence: .forSession)
     }
 
     func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {
@@ -129,20 +119,23 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
             ],
         ]
         
-        session.request(
-            "https://\(tvIp):1926/6/pair/grant", method: .post,
-            parameters: parameters, encoding: JSONEncoding.default
-        )
-        .authenticate(with: credential).response { response in
-            switch response.result {
-            case .success(_):
-                self.config = AmbilightTvConfig.configure(
-                    tvIp: tvIp, username: user, password: pass)
-            case .failure(let error):
-                self.log = error.localizedDescription
+        if let credential {
+            session.request(
+                "https://\(tvIp):1926/6/pair/grant", method: .post,
+                parameters: parameters, encoding: JSONEncoding.default
+            )
+            .authenticate(with: credential).response { response in
+                switch response.result {
+                case .success(_):
+                    self.config = AmbilightTvConfig.configure(
+                        tvIp: tvIp, username: user, password: pass)
+                case .failure(let error):
+                    self.log = error.localizedDescription
+                }
+                debugPrint(response)
             }
-            debugPrint(response)
         }
+        
     }
 
     private func createDeviceId() -> String {
@@ -180,42 +173,45 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
     }
 
     func updateState() {
-        session.request("https://\(config!.tvIp):1926/6/HueLamp/power", method: .get)
-            .authenticate(with: credential)
-            .responseString { r in
-                switch r.result {
-                case .success(let value):
-                    self.currentState =
+        if let credential {
+            session.request("https://\(config!.tvIp):1926/6/HueLamp/power", method: .get)
+                .authenticate(with: credential)
+                .responseString { r in
+                    switch r.result {
+                    case .success(let value):
+                        self.currentState =
                         switch value {
                         case "{\"power\":\"Off\"}": AmbilightHueMode.disabled
                         case "{\"power\":\"On\"}": AmbilightHueMode.enabled
                         default: nil
                         }
-                case .failure(let error):
-                    self.log = error.localizedDescription
-                    self.currentState = nil
+                    case .failure(let error):
+                        self.log = error.localizedDescription
+                        self.currentState = nil
+                    }
+                    debugPrint(r)
                 }
-                debugPrint(r)
-            }
+        }
     }
 
     func setAmbilightHueMode(newMode: AmbilightHueMode) {
         let powerState = newMode == AmbilightHueMode.enabled ? "On" : "Off"
         let parameters: [String: Any] = ["power": powerState]
-
-        session.request(
-            "https://\(config!.tvIp):1926/6/HueLamp/power", method: .post,
-            parameters: parameters, encoding: JSONEncoding.default
-        )
-        .authenticate(with: credential).response { response in
-            switch response.result {
-            case .success(_):
-                self.currentState = newMode
-                self.log = "ok for \(powerState)"
-            case .failure(let error):
-                self.log = error.localizedDescription
+        if let credential {
+            session.request(
+                "https://\(config!.tvIp):1926/6/HueLamp/power", method: .post,
+                parameters: parameters, encoding: JSONEncoding.default
+            )
+            .authenticate(with: credential).response { response in
+                switch response.result {
+                case .success(_):
+                    self.currentState = newMode
+                    self.log = "ok for \(powerState)"
+                case .failure(let error):
+                    self.log = error.localizedDescription
+                }
+                debugPrint(response)
             }
-            debugPrint(response)
         }
     }
 }
