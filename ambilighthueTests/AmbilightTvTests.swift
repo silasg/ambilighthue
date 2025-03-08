@@ -13,7 +13,7 @@ import Alamofire
 final class AmbilightTvTests: XCTestCase {
 
     private class MockSessionFactory: SessionFactoryProtocol {
-        func makeSession(tvIp: String) -> Alamofire.Session {
+        func makeSession() -> Alamofire.Session {
             return Alamofire.Session(configuration: configuration)
         }
     }

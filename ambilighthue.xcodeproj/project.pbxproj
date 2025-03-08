@@ -10,6 +10,7 @@
 		3BABDFD45F22EE0AFE9C85C2 /* Pods_ambilighthue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971D087BFA4A6F649FA1224A /* Pods_ambilighthue.framework */; };
 		9102F8582D23F966006555CF /* AmbilightHueControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */; };
 		9102F85B2D284084006555CF /* AmbilightTvStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9102F8592D241A26006555CF /* AmbilightTvStub.swift */; };
+		9105693E2D7C4BF2003FCA1D /* SessionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9105693D2D7C4BF2003FCA1D /* SessionFactory.swift */; };
 		9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */; };
 		915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */; };
 		915945A22C28372E003D2AC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A12C28372E003D2AC0 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		772E1536E5DDA402B6FC04F0 /* Pods-ambilighthue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.release.xcconfig"; sourceTree = "<group>"; };
 		9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlViewTests.swift; sourceTree = "<group>"; };
 		9102F8592D241A26006555CF /* AmbilightTvStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvStub.swift; sourceTree = "<group>"; };
+		9105693D2D7C4BF2003FCA1D /* SessionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFactory.swift; sourceTree = "<group>"; };
 		9159459A2C28372D003D2AC0 /* ambilighthue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambilighthue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilightHueApp.swift; sourceTree = "<group>"; };
 		9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				91E22EF62D20859F00034DEB /* AmbilightTvConfig.swift */,
 				915945A12C28372E003D2AC0 /* Assets.xcassets */,
 				915945A32C28372E003D2AC0 /* Preview Content */,
+				9105693D2D7C4BF2003FCA1D /* SessionFactory.swift */,
 			);
 			path = ambilighthue;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				91986A6F2D730BE5003A09A6 /* AmbilightTvPairingInProgress.swift in Sources */,
 				9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */,
 				91E22EF72D20859F00034DEB /* AmbilightTvConfig.swift in Sources */,
+				9105693E2D7C4BF2003FCA1D /* SessionFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

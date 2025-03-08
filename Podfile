@@ -14,5 +14,5 @@ target 'ambilighthue' do
     pod 'ViewInspector'
   end
 
-pod "Alamofire"
+pod 'Alamofire'
 end

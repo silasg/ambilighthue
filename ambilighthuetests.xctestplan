@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "2716DBCD-3E70-4323-9CB7-E1984D80BA70",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "selectedTests" : [
+        "AmbilightHueControlViewTests\/test_off_button_has_image_if_ambilighttv_is_disabled()",
+        "AmbilightHueControlViewTests\/test_off_button_tap_disables_ambilight()",
+        "AmbilightHueControlViewTests\/test_on_button_has_image_if_ambilighttv_is_enabled()",
+        "AmbilightHueControlViewTests\/test_on_button_tap_enables_ambilight()",
+        "AmbilightHueControlViewTests\/test_stack_has_angulargradient_background_if_ambilighttv_is_enabled()",
+        "AmbilightHueControlViewTests\/test_stack_has_no_angulargradient_background_if_ambilighttv_is_disabled()",
+        "AmbilightHueControlViewTests\/test_view_updates_state_on_init()",
+        "AmbilightTvTests\/test_post_power_off_to_tvendpoint_when_mode_set_to_disabled()",
+        "AmbilightTvTests\/test_post_power_on_to_tvendpoint_when_mode_set_to_enabled()",
+        "AmbilightTvTests\/test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint()"
+      ],
+      "target" : {
+        "containerPath" : "container:ambilighthue.xcodeproj",
+        "identifier" : "915945A92C28372E003D2AC0",
+        "name" : "ambilighthueTests"
+      }
+    }
+  ],
+  "version" : 1
+}
