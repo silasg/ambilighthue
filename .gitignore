@@ -1,2 +1,5 @@
 Pods/
 ambilighthue.xcworkspace/
+.chroma/
+.vscode/
+build/
