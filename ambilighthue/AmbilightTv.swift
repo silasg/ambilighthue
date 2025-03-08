@@ -15,6 +15,7 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
     func resetPairing() {
         AmbilightTvConfig.clear()
         config = nil
+        credential = nil
     }
 
     @Published var log = "(no log)"
@@ -35,12 +36,6 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
         }
     }
 
-    struct PairingInfo: Decodable {
-        let timestamp: Int
-        let error_id: String
-        let auth_key: String
-    }
-
     func startPairing(tvIp: String) {
         if tvIp == "" {
             return
@@ -57,13 +52,19 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
 
         // curl --insecure -X POST -H "Content-Type: application/json" -d "{'scope': ['read', 'write', 'control'], 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$device_id'}}" https://TV_IP:1926/6/pair/request
 
+        struct PairingInfo: Decodable {
+            let timestamp: Int
+            let error_id: String
+            let auth_key: String
+        }
+        
        session.request(
             "https://\(tvIp):1926/6/pair/request", method: .post, parameters: parameters,
             encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]
         )
         .validate()
-        .responseDecodable(of: PairingInfo.self) { r in
-            switch r.result {
+        .responseDecodable(of: PairingInfo.self) { response in
+            switch response.result {
 
             // will return: {"error_id":"SUCCESS","error_text":"Authorization required","auth_key":"a8d1b59ad64689d76b160dae57c396bbf77cbb8f6c98b05751fa75c2c4c61361","timestamp":55285,"timeout":60}
 
@@ -81,7 +82,6 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
 
             case .failure(let err):
                 self.log = err.localizedDescription
-
             }
         }
 
@@ -99,8 +99,8 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
 
         let signature = createSignature(toSign: String(pairing.timeStamp) + tvPin)
 
-        //try up to 10 times
-        // curl --insecure -v --trace-ascii debug.log --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
+        // python implementation tried up to 10 times, however I never needed a single retry
+        // curl --insecure -v --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
 
         let parameters: [String: Any] = [
             "auth": [
@@ -176,31 +176,29 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
         if let credential {
             session.request("https://\(config!.tvIp):1926/6/HueLamp/power", method: .get)
                 .authenticate(with: credential)
-                .responseString { r in
-                    switch r.result {
+                .responseString { response in
+                    switch response.result {
                     case .success(let value):
-                        self.currentState =
-                        switch value {
-                        case "{\"power\":\"Off\"}": AmbilightHueMode.disabled
-                        case "{\"power\":\"On\"}": AmbilightHueMode.enabled
-                        default: nil
+                        self.currentState = switch value {
+                            case "{\"power\":\"Off\"}": AmbilightHueMode.disabled
+                            case "{\"power\":\"On\"}": AmbilightHueMode.enabled
+                            default: nil
                         }
                     case .failure(let error):
                         self.log = error.localizedDescription
                         self.currentState = nil
                     }
-                    debugPrint(r)
+                    debugPrint(response)
                 }
         }
     }
 
     func setAmbilightHueMode(newMode: AmbilightHueMode) {
         let powerState = newMode == AmbilightHueMode.enabled ? "On" : "Off"
-        let parameters: [String: Any] = ["power": powerState]
         if let credential {
             session.request(
                 "https://\(config!.tvIp):1926/6/HueLamp/power", method: .post,
-                parameters: parameters, encoding: JSONEncoding.default
+                parameters: ["power": powerState], encoding: JSONEncoding.default
             )
             .authenticate(with: credential).response { response in
                 switch response.result {

@@ -87,8 +87,8 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
                 Button("Close", role: .cancel) { dismiss() }
             }
             Spacer()
-            Text("Latest log entries:").font(.headline)
-            Text(ambilightTv.log).lineLimit(2...4)
+            Text("Latest log entry:").font(.headline)
+            Text(ambilightTv.log)
             Spacer()
         }.padding(.horizontal, 100)
             .onAppear() {
