@@ -126,6 +126,7 @@ final class AmbilightTvTests: XCTestCase {
         XCTAssertNil(sut.config)
 
     }
+    
     func test_return_pairing_in_progress_and_set_credentials_when_pairing_requested() throws {
         // arrange
         var mock = Mock(
@@ -177,6 +178,59 @@ final class AmbilightTvTests: XCTestCase {
                 expectedBodyArguments, pairingInProgressExpectation,
                 credentialAuthKeySetExpectation,
             ], timeout: 5.0)
+    }
+    
+    func test_confirm_pairing_sets_config_correctly() throws {
+        // arrange
+        let pairingInProgress = AmbilightTvPairingInProgress(tvIp: AmbilightTvTests.tvip, deviceId: "mockedDeviceId", authKey: "mockedAuthKey", timeStamp: 12345)
+        let tvPin = "1234"
+        
+        var mock = Mock(
+            url: AmbilightTvTests.PairGrantEndpoint, contentType: .json, statusCode: 200,
+            data: [.post: Data()])
+        let expectedBodyArguments = expectation(description: "The body sent to TV to request pairing")
+        struct AuthPars: Decodable {
+            let auth_AppId: String
+            let pin: String
+            let auth_timestamp: Int
+            let auth_signature: String
+        }
+        
+        struct RequestPars: Decodable {
+            let auth: AuthPars
+            let device: [String: String]
+        }
+        mock.onRequestHandler = OnRequestHandler(
+            httpBodyType: RequestPars.self,
+            callback: { request, postBodyArguments in
+                if request.method == .post
+                    && postBodyArguments?.auth.auth_AppId == "1"
+                    && postBodyArguments?.auth.pin ==  tvPin
+                    && postBodyArguments?.auth.auth_timestamp == pairingInProgress.timeStamp
+                    && postBodyArguments?.auth.auth_signature ==  pairingInProgress.createSignature(tvPin: tvPin)
+                    && postBodyArguments?.device["device_name"] == "heliotrope"
+                    && postBodyArguments?.device["device_os"] == "Android"
+                    && postBodyArguments?.device["app_name"] == "AmilightHue"
+                    && postBodyArguments?.device["type"] == "native"
+                    && postBodyArguments?.device["app_id"] == "app.id"
+                    && postBodyArguments?.device["id"] == pairingInProgress.deviceId
+                {
+                    expectedBodyArguments.fulfill()
+                }
+            })
+        mock.register()
+        
+        let sut = createAmbilightTvForTest()
+        sut.pairingInProgress = pairingInProgress
+        
+        // act
+        sut.confirmPairing(tvPin: tvPin, pairing: pairingInProgress)
+        
+        // assert
+        let configSetExpectation = expectation(for: sut.config?.tvIp == AmbilightTvTests.tvip
+                                               && sut.config?.username == pairingInProgress.deviceId
+                                               && sut.config?.password == pairingInProgress.authKey)
+        wait(for: [ expectedBodyArguments, configSetExpectation,], timeout: 5.0)
     }
 
     private func createAmbilightTvForTest() -> AmbilightTv {

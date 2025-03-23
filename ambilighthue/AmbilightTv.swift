@@ -97,7 +97,7 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
         let pass = pairing.authKey
         let tvIp = pairing.tvIp
 
-        let signature = createSignature(toSign: String(pairing.timeStamp) + tvPin)
+        let signature = pairing.createSignature(tvPin: tvPin)
 
         // python implementation tried up to 10 times, however I never needed a single retry
         // curl --insecure -v --digest -u $user:$pass -X POST -H "Content-Type: application/json" -d "{'auth': {'auth_AppId': '1', 'pin': '$pin_input', 'auth_timestamp': $timestamp_input, 'auth_signature': "b\'$auth_signature\'"}, 'device': {'device_name': 'heliotrope', 'device_os': 'Android', 'app_name': '$appname', 'type': 'native', 'app_id': 'app.id', 'id': '$user'}}" https://TV_IP:1926/6/pair/grant
@@ -107,7 +107,7 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
                 "auth_AppId": "1",
                 "pin": tvPin,
                 "auth_timestamp": pairing.timeStamp,
-                "auth_signature": signature as Any,
+                "auth_signature": signature,
             ],
             "device": [
                 "device_name": "heliotrope",
@@ -151,25 +151,6 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
         }
 
         return deviceId
-    }
-
-    private func createSignature(toSign: String) -> String {
-        let secretKey: String = "oEC9Uhg5xbg566mpYPjhoWUwFtFAwTFoTW1By0vaOD4="
-        guard let keyData = Data(base64Encoded: secretKey),
-            let toSignData = toSign.data(using: .utf8)
-        else { return "" }
-
-        var hmac = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
-        keyData.withUnsafeBytes { keyBytes in
-            toSignData.withUnsafeBytes { toSignBytes in
-                CCHmac(
-                    CCHmacAlgorithm(kCCHmacAlgSHA1), keyBytes.baseAddress, keyData.count,
-                    toSignBytes.baseAddress, toSignData.count, &hmac)
-            }
-        }
-
-        let hmacData = Data(hmac)
-        return hmacData.base64EncodedString()
     }
 
     func updateState() {
