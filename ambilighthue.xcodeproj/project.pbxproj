@@ -17,11 +17,14 @@
 		915945A52C28372E003D2AC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 915945A42C28372E003D2AC0 /* Preview Assets.xcassets */; };
 		915945AF2C28372E003D2AC0 /* AmbilightTvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */; };
 		915945C82C28551E003D2AC0 /* AmbilightTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915945C72C28551E003D2AC0 /* AmbilightTv.swift */; };
+		916DCBED2DAAF9B7008F612F /* PinEntrySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DCBEC2DAAF9AC008F612F /* PinEntrySheetView.swift */; };
+		916DCBEF2DAAFB79008F612F /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916DCBEE2DAAFB73008F612F /* ViewExtensions.swift */; };
 		91986A6D2D72FC45003A09A6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91986A6C2D72FC45003A09A6 /* SettingsView.swift */; };
 		91986A6F2D730BE5003A09A6 /* AmbilightTvPairingInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91986A6E2D730BE5003A09A6 /* AmbilightTvPairingInProgress.swift */; };
 		91986A712D730BFD003A09A6 /* AmbilightTvProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91986A702D730BFD003A09A6 /* AmbilightTvProtocol.swift */; };
 		91D92E1F2D16FDD20025E3B9 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = 91D92E1E2D16FDD20025E3B9 /* Mocker */; };
 		91E22EF72D20859F00034DEB /* AmbilightTvConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E22EF62D20859F00034DEB /* AmbilightTvConfig.swift */; };
+		91E858D62D930CCB00B5C33E /* SettingsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E858D52D930CCB00B5C33E /* SettingsViewTests.swift */; };
 		B2FF6AF3AA360672A6EDA84A /* Pods_ambilighthueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29209E387B2026A2FA51774B /* Pods_ambilighthueTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,10 +53,13 @@
 		915945AA2C28372E003D2AC0 /* ambilighthueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ambilighthueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvTests.swift; sourceTree = "<group>"; };
 		915945C72C28551E003D2AC0 /* AmbilightTv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTv.swift; sourceTree = "<group>"; };
+		916DCBEC2DAAF9AC008F612F /* PinEntrySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySheetView.swift; sourceTree = "<group>"; };
+		916DCBEE2DAAFB73008F612F /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		91986A6C2D72FC45003A09A6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		91986A6E2D730BE5003A09A6 /* AmbilightTvPairingInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvPairingInProgress.swift; sourceTree = "<group>"; };
 		91986A702D730BFD003A09A6 /* AmbilightTvProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvProtocol.swift; sourceTree = "<group>"; };
 		91E22EF62D20859F00034DEB /* AmbilightTvConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvConfig.swift; sourceTree = "<group>"; };
+		91E858D52D930CCB00B5C33E /* SettingsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewTests.swift; sourceTree = "<group>"; };
 		91F63C382C2EE2EF009BBBE3 /* todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = todo.md; sourceTree = "<group>"; };
 		971D087BFA4A6F649FA1224A /* Pods_ambilighthue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ambilighthue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC2F8D547D974DE200AB41E8 /* Pods-ambilighthueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthueTests.release.xcconfig"; path = "Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +120,8 @@
 		9159459C2C28372D003D2AC0 /* ambilighthue */ = {
 			isa = PBXGroup;
 			children = (
+				916DCBEE2DAAFB73008F612F /* ViewExtensions.swift */,
+				916DCBEC2DAAF9AC008F612F /* PinEntrySheetView.swift */,
 				9102F8592D241A26006555CF /* AmbilightTvStub.swift */,
 				9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */,
 				9159459F2C28372D003D2AC0 /* AmbilightHueControlView.swift */,
@@ -140,6 +148,7 @@
 		915945AD2C28372E003D2AC0 /* ambilighthueTests */ = {
 			isa = PBXGroup;
 			children = (
+				91E858D52D930CCB00B5C33E /* SettingsViewTests.swift */,
 				915945AE2C28372E003D2AC0 /* AmbilightTvTests.swift */,
 				9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */,
 			);
@@ -290,9 +299,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -329,9 +342,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -345,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916DCBEF2DAAFB79008F612F /* ViewExtensions.swift in Sources */,
 				915945A02C28372D003D2AC0 /* AmbilightHueControlView.swift in Sources */,
 				91986A712D730BFD003A09A6 /* AmbilightTvProtocol.swift in Sources */,
 				9102F85B2D284084006555CF /* AmbilightTvStub.swift in Sources */,
@@ -354,6 +372,7 @@
 				9159459E2C28372D003D2AC0 /* ambilightHueApp.swift in Sources */,
 				91E22EF72D20859F00034DEB /* AmbilightTvConfig.swift in Sources */,
 				9105693E2D7C4BF2003FCA1D /* SessionFactory.swift in Sources */,
+				916DCBED2DAAF9B7008F612F /* PinEntrySheetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +382,7 @@
 			files = (
 				915945AF2C28372E003D2AC0 /* AmbilightTvTests.swift in Sources */,
 				9102F8582D23F966006555CF /* AmbilightHueControlViewTests.swift in Sources */,
+				91E858D62D930CCB00B5C33E /* SettingsViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

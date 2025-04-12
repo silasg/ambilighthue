@@ -71,7 +71,7 @@ struct AmbilightHueControlView<T: AmbilightTvProtocol>: View {
             askSettings = true
         }
     }
-    .alert(isPresented: $askSettings) {
+    .alert2(isPresented: $askSettings) {
         Alert(
             title: Text("TV not configured"),
             message: Text("The connection to TV needs to be configured to use this app. Do you want to configure it now?"),

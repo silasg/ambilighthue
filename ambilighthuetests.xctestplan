@@ -28,7 +28,13 @@
         "AmbilightTvTests\/test_reset_pairing_clears_credentials_and_config_and_pairing_in_progress()",
         "AmbilightTvTests\/test_return_pairing_in_progress_and_set_credentials_when_pairing_requested()",
         "AmbilightTvTests\/test_return_pairing_in_progress_when_pairing_requested()",
-        "AmbilightTvTests\/test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint()"
+        "AmbilightTvTests\/test_update_state_to_enabled_when_power_on_is_returned_by_tvendpoint()",
+        "SettingsViewTests\/test_close_button_dismisses_view()",
+        "SettingsViewTests\/test_disabled_fields_display_correct_information()",
+        "SettingsViewTests\/test_ip_address_input_lost_focus_triggers_pairing()",
+        "SettingsViewTests\/test_ip_address_input_triggers_pairing()",
+        "SettingsViewTests\/test_pin_alert_is_presented_when_pairing_in_progress()",
+        "SettingsViewTests\/test_reset_button_clears_settings()"
       ],
       "target" : {
         "containerPath" : "container:ambilighthue.xcodeproj",

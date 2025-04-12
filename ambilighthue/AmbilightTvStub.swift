@@ -19,7 +19,7 @@ class AmbilightTvStub: AmbilightTvProtocol {
     var isConfigured: Bool { return config != nil }
     
     func startPairing(tvIp: String)  {
-        
+        pairingInProgress = AmbilightTvPairingInProgress(tvIp: tvIp, deviceId: "pairing-device-id", authKey: "pairing-auth-key", timeStamp: -1)
     }
     
     func confirmPairing(tvPin: String, pairing: AmbilightTvPairingInProgress) {

@@ -32,7 +32,7 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
             Text("Please enter your TV's IP address (not hostname). You can find it in Settings > Network & Internet > Choose the connected Wi-Fi network or using your network router's management interface.")
             HStack {
                 Label("TV IP", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
-                TextField("TV IP Address", text: $inputIp)
+                TextField("", text: $inputIp, prompt: Text("TV IP Address"))
                     .keyboardType(.numbersAndPunctuation)
                     .focused($isIpInputFocused)
                     .onChange(of: isIpInputFocused, initial: false) { focused, arguments  in
@@ -45,34 +45,30 @@ struct SettingsView<T: AmbilightTvProtocol>: View {
                             isPairing = true
                         }
                     })
-                    .alert("Enter PIN", isPresented: $isPairing) {
-                        TextField("", text: $inputPin).keyboardType(.numbersAndPunctuation)
-                            Button("OK", action: {
-                                ambilightTv.confirmPairing(tvPin: inputPin, pairing: ambilightTv.pairingInProgress!)
-                                isPairing = false
-                            })
-                            Button("Cancel", role: .cancel) {
-                                inputIp = ambilightTv.config?.tvIp ?? ""
-                                ambilightTv.resetPairing()
-                                isPairing = false
-                            }
-                        }
-                        message: {
-                            Text("Please enter the PIN shown at your TV within the next minute")
-                        }
+                    .sheet2(isPresented: $isPairing)  {
+                        // This closure is called when the sheet is dismissed
+                        // Similar to the alert's dismiss action
+                    } content: {
+                        PinEntrySheetView(
+                            inputPin: $inputPin,
+                            isPairing: $isPairing,
+                            inputIp: $inputIp,
+                            ambilightTv: ambilightTv
+                        )
+                    }
             }
             HStack {
                 Label("TV API user", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
-                TextField(ambilightTv.config?.username ?? "TV API user will be shown here", text: $inputDisabled).disabled(true)
+                TextField(ambilightTv.config?.username ?? "", text: $inputDisabled, prompt: Text("TV API user will be shown here")).disabled(true)
             }
             HStack {
                 Label("TV API secret", systemImage: "").labelStyle(.titleOnly).frame(width: 250, alignment: .trailing)
-                TextField(ambilightTv.config?.password ?? "TV API secret will be shown here", text: $inputDisabled).disabled(true)
+                TextField(ambilightTv.config?.password ?? "", text: $inputDisabled, prompt: Text("TV API secret will be shown here")).disabled(true)
             }
 
             HStack() {
                 Button("Reset") { showResetAlert = true }
-                    .alert(isPresented: $showResetAlert) {
+                    .alert2(isPresented: $showResetAlert) {
                         Alert(
                             title: Text("Reset Settings"),
                             message: Text("This will reset all settings. You will need to pair your TV again. Continue?"),
