@@ -27,6 +27,11 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
     var pairingInProgress: AmbilightTvPairingInProgress?
     var isConfigured: Bool { return config != nil }
     let AppName = "AmilightHue"
+    
+    private func logMessage(_ message: String) {
+        self.log = message
+        debugPrint(message)
+    }
 
     init(config: AmbilightTvConfig?, sessionFac: SessionFactoryProtocol) {
         self.config = config
@@ -70,18 +75,18 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
 
             case .success(let value):
                 if value.error_id == "SUCCESS" {
-                    self.log = "Pairing requested"
+                    self.logMessage("Pairing requested")
                     self.setCredential(user: deviceId, pass: value.auth_key)
                     self.pairingInProgress = AmbilightTvPairingInProgress(
                         tvIp: tvIp, deviceId: deviceId, authKey: value.auth_key,
                         timeStamp: value.timestamp)
 
                 } else {
-                    self.log = "Pairing request failed with error: \(value.error_id)"
+                    self.logMessage("Pairing request failed with error: \(value.error_id)")
                 }
 
             case .failure(let err):
-                self.log = err.localizedDescription
+                self.logMessage(err.localizedDescription)
             }
         }
 
@@ -124,15 +129,16 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
                 "https://\(tvIp):1926/6/pair/grant", method: .post,
                 parameters: parameters, encoding: JSONEncoding.default
             )
-            .authenticate(with: credential).response { response in
+            .authenticate(with: credential)
+            .responseDecodable(of: Empty.self, emptyResponseCodes: [200, 204, 205]) { response in
                 switch response.result {
                 case .success(_):
                     self.config = AmbilightTvConfig.configure(
                         tvIp: tvIp, username: user, password: pass)
+                    self.logMessage("Pairing confirmed successfully")
                 case .failure(let error):
-                    self.log = error.localizedDescription
+                    self.logMessage(error.localizedDescription)
                 }
-                debugPrint(response)
             }
         }
         
@@ -166,7 +172,7 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
                             default: nil
                         }
                     case .failure(let error):
-                        self.log = error.localizedDescription
+                        self.logMessage(error.localizedDescription)
                         self.currentState = nil
                     }
                     debugPrint(response)
@@ -185,9 +191,9 @@ class AmbilightTv: AmbilightTvProtocol, ObservableObject {
                 switch response.result {
                 case .success(_):
                     self.currentState = newMode
-                    self.log = "ok for \(powerState)"
+                    self.logMessage("ok for \(powerState)")
                 case .failure(let error):
-                    self.log = error.localizedDescription
+                    self.logMessage(error.localizedDescription)
                 }
                 debugPrint(response)
             }
