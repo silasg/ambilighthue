@@ -1,0 +1,61 @@
+# Homelab stack for Ambilight Hue control.
+#
+#   webapp     Go REST backend + PWA that talks to the Philips TV.
+#   homebridge Exposes the ambilight as a HomeKit switch (calls webapp directly).
+#   caddy      TLS termination + reverse proxy for the human/Shortcuts-facing UI.
+#
+# All three share the default compose network so they can reach each other by
+# service name (e.g. http://webapp:8080). Copy .env.example to .env first.
+#
+# Homelab is Intel/AMD (linux/amd64); the webapp image is multi-arch so this
+# also works on arm64 hosts without changes.
+
+services:
+  webapp:
+    image: ${WEBAPP_IMAGE:-ghcr.io/OWNER/ambilighthue/webapp:latest}
+    pull_policy: always
+    restart: unless-stopped
+    environment:
+      # The app strips its own BASE_PATH; Caddy proxies the full prefixed path
+      # through WITHOUT stripping, so BASE_PATH and the Caddyfile path must match.
+      BASE_PATH: ${BASE_PATH:-/ambilight}
+      CONFIG_PATH: /data/config.json
+      # Optional shared secret. If non-empty, all /api/* except /api/health
+      # require the X-API-Token header. Homebridge and Caddy pass it through.
+      API_TOKEN: ${API_TOKEN:-}
+    volumes:
+      - webapp-data:/data
+    # No published host port: only Caddy (and Homebridge, over the internal
+    # network) reach it. Port 8080 is reachable in-network without `expose`.
+
+  homebridge:
+    image: homebridge/homebridge:latest
+    restart: unless-stopped
+    # Host network lets HomeKit/mDNS pairing work reliably on the LAN. The
+    # Homebridge UI is then on http://<host>:8581. (If your host can't use
+    # network_mode: host, switch to a bridged setup and publish 8581 + the
+    # HomeKit bridge port, and ensure mDNS reflection reaches the LAN.)
+    network_mode: host
+    environment:
+      TZ: ${TZ:-Etc/UTC}
+      HOMEBRIDGE_CONFIG_UI_PORT: 8581
+    volumes:
+      # Copy homebridge/config.example.json -> homebridge/config.json and fill
+      # in your API_TOKEN before first start (see README).
+      - ./homebridge:/homebridge
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  webapp-data:
+  caddy-data:
+  caddy-config:

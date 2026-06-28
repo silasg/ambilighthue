@@ -1,0 +1,38 @@
+# Caddyfile for the Ambilight Hue homelab stack.
+#
+# The webapp is served under /ambilight/* so it can share a hostname with other
+# homelab services. The Go app is BASE_PATH-aware: when started with
+# BASE_PATH=/ambilight (see docker-compose.yml) it expects the FULL prefixed
+# path in the request and serves /ambilight/api/..., /ambilight/ (the PWA), etc.
+#
+# Therefore use `handle` + `reverse_proxy` (which PRESERVES the path) and NOT
+# `handle_path` (which would strip /ambilight and break the app). We also send
+# X-Forwarded-Prefix as a belt-and-suspenders signal the app tolerates.
+#
+# Caddy provisions TLS automatically. Pick ONE of the address forms below:
+#
+#   * Real public domain  -> `home.example.com` : Caddy gets a Let's Encrypt cert
+#     automatically (needs ports 80/443 reachable + DNS pointing here).
+#   * LAN-only host name   -> `home.example.lan` : use Caddy's `tls internal`
+#     (its own local CA). Trust the CA on your devices, or accept the warning.
+#     watchOS Shortcuts are strict about TLS — a real domain is the reliable path.
+#   * Quick test           -> `:443` with `tls internal` and a self-signed cert.
+
+home.example.lan {
+    # Internal CA / self-signed. Replace with a real domain (and drop this line)
+    # to get automatic public certificates from Let's Encrypt.
+    tls internal
+
+    handle /ambilight/* {
+        reverse_proxy webapp:8080 {
+            header_up X-Forwarded-Prefix /ambilight
+        }
+    }
+
+    # Add further homelab services here, e.g.:
+    # handle /homebridge/* { reverse_proxy homebridge:8581 }
+
+    handle {
+        respond "Ambilight Hue lives at /ambilight/" 200
+    }
+}

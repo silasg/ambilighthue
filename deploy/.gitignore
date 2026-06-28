@@ -1,0 +1,7 @@
+# Real secrets and runtime state — never commit these.
+.env
+homebridge/config.json
+
+# Homebridge runtime data (created on first run when ./homebridge is mounted).
+homebridge/*
+!homebridge/config.example.json

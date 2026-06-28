@@ -1,0 +1,46 @@
+{
+  "bridge": {
+    "name": "Homebridge Ambilight",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+  "description": "Example Homebridge config exposing the Philips TV ambilight as a HomeKit switch. Copy to config.json, then replace TOKEN-CHANGE-ME with the API_TOKEN from your .env (or remove the X-API-Token headers if API_TOKEN is unset). Homebridge talks to the webapp DIRECTLY over the internal docker network (http://webapp:8080), bypassing Caddy and its base path.",
+  "accessories": [
+    {
+      "accessory": "HTTP-SWITCH",
+      "name": "Ambilight",
+      "switchType": "stateful",
+      "onUrl": {
+        "url": "http://webapp:8080/api/on",
+        "method": "POST",
+        "headers": {
+          "X-API-Token": "TOKEN-CHANGE-ME"
+        }
+      },
+      "offUrl": {
+        "url": "http://webapp:8080/api/off",
+        "method": "POST",
+        "headers": {
+          "X-API-Token": "TOKEN-CHANGE-ME"
+        }
+      },
+      "statusUrl": {
+        "url": "http://webapp:8080/api/state",
+        "method": "GET",
+        "headers": {
+          "X-API-Token": "TOKEN-CHANGE-ME"
+        }
+      },
+      "statusPattern": "\"power\":\"on\"",
+      "pollInterval": 15
+    }
+  ],
+  "platforms": [
+    {
+      "name": "Config",
+      "port": 8581,
+      "platform": "config"
+    }
+  ]
+}
