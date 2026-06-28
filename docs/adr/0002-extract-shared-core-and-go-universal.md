@@ -1,4 +1,4 @@
-# 1. Extract a shared core layer and go universal (iOS + iPadOS + watchOS)
+# 2. Extract a shared core layer and go universal (iOS + iPadOS + watchOS)
 
 ## Status
 

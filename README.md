@@ -1,6 +1,21 @@
 # Ambilight Hue Control
 
-A tvOS application that provides simple control over Philips TV ambilight functionality through Hue integration.
+A monorepo of clients that control a Philips TV's ambilight (over the local
+JointSpace API) from several platforms, plus a self-hostable web service for
+homelab/HomeKit integration.
+
+## Repository Layout
+
+| # | Path | What it is |
+|---|------|------------|
+| 1 | `ambilighthue/` | The original **tvOS** SwiftUI app (documented below). |
+| 2 | `AmbilightCore/` + `Platforms/` | The **universal Apple port** (iOS + iPadOS + watchOS) built on a shared `AmbilightCore` Swift package. See `IOS_PORTING.md`. |
+| 3 | `webapp/` | A **Go stdlib backend + vanilla PWA** offering the same control as a REST API, Shortcuts-friendly and installable to the home screen. See `webapp/README.md`. |
+| 4 | `deploy/` | Homelab **Docker Compose** stack (webapp + Homebridge + Caddy) for HomeKit control. |
+| 5 | `docs/` | Strategy, the deployment proposal, and Architecture Decision Records (`docs/adr/`). |
+
+The web app is the default deployment target; the Apple apps remain source-only
+(no CI build/signing). The rest of this README documents the tvOS app.
 
 ## Features
 
