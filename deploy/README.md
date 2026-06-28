@@ -2,7 +2,7 @@
 
 A ready-to-run Docker Compose stack that lets you control your Philips TV's
 ambilight from the Apple **Home app**, **Siri**, **Apple Watch**, and **Apple
-Shortcuts**. See [`../STRATEGY.md`](../STRATEGY.md) and
+Shortcuts**. See [`../archive/STRATEGY.md`](../archive/STRATEGY.md) and
 [`../docs/deployment-proposal.md`](../docs/deployment-proposal.md) for the design
 rationale.
 

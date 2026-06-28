@@ -1,6 +1,11 @@
 # Deployment & Repository Proposal
 
-Plan for publishing this project to GitHub and deploying the web app to the homelab, while keeping the tvOS and iOS/watchOS apps around. Companion to [`../STRATEGY.md`](../STRATEGY.md) and [`../APPLE_TV_CONTROL_OPTIONS.md`](../APPLE_TV_CONTROL_OPTIONS.md).
+> **Historical / partially superseded.** This proposal's §2 ("keep the Xcode
+> project where it is") was reversed by [ADR-0003](adr/0003-archive-native-app-webapp-first-repo.md),
+> which moved the native app into `archive/`. The publish/deploy work it describes
+> is complete; the document is retained for the credential-audit record in §3.
+
+Plan for publishing this project to GitHub and deploying the web app to the homelab, while keeping the tvOS and iOS/watchOS apps around. Companion to [`../archive/STRATEGY.md`](../archive/STRATEGY.md) and [`../archive/APPLE_TV_CONTROL_OPTIONS.md`](../archive/APPLE_TV_CONTROL_OPTIONS.md).
 
 ## 1. Decisions (resolved)
 

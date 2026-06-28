@@ -1,128 +1,53 @@
 # Ambilight Hue Control
 
-A monorepo of clients that control a Philips TV's ambilight (over the local
-JointSpace API) from several platforms, plus a self-hostable web service for
-homelab/HomeKit integration.
+Control a Philips TV's ambilight (the `HueLamp` feature) over the local
+**JointSpace** API. The maintained product is a small self-hostable **web
+service** — a dependency-free Go REST backend plus an installable PWA — designed
+for homelab and Apple-Home integration. The repo also keeps the original native
+Apple apps (tvOS/iOS/watchOS) in an archive.
 
 ## Repository Layout
 
 | # | Path | What it is |
 |---|------|------------|
-| 1 | `ambilighthue/` | The original **tvOS** SwiftUI app (documented below). |
-| 2 | `AmbilightCore/` + `Platforms/` | The **universal Apple port** (iOS + iPadOS + watchOS) built on a shared `AmbilightCore` Swift package. See `IOS_PORTING.md`. |
-| 3 | `webapp/` | A **Go stdlib backend + vanilla PWA** offering the same control as a REST API, Shortcuts-friendly and installable to the home screen. See `webapp/README.md`. |
-| 4 | `deploy/` | Homelab **Docker Compose** stack (webapp + Homebridge + Caddy) for HomeKit control. |
-| 5 | `docs/` | Strategy, the deployment proposal, and Architecture Decision Records (`docs/adr/`). |
+| 1 | `webapp/` | **The product.** Go stdlib backend + vanilla PWA exposing ambilight control as a REST API (Shortcuts-friendly, installable). See [`webapp/README.md`](webapp/README.md). |
+| 2 | `deploy/` | **Homelab Docker Compose** stack (webapp + Homebridge + Caddy) that puts the ambilight in HomeKit. See [`deploy/README.md`](deploy/README.md). |
+| 3 | `docs/` | Architecture Decision Records (`docs/adr/`), the deployment proposal, and agent plans/handoffs. |
+| 4 | `archive/` | **Frozen, unmaintained** native Apple apps (tvOS/iOS/watchOS) and their strategy/porting docs. See [`archive/README.md`](archive/README.md). |
 
-The web app is the default deployment target; the Apple apps remain source-only
-(no CI build/signing). The rest of this README documents the tvOS app.
+## Quick start
 
-## Features
+- **Run the web app locally:** see [`webapp/README.md`](webapp/README.md)
+  (`mise run run` from the repo root, then open `http://localhost:8080`).
+- **Deploy to a homelab:** see [`deploy/README.md`](deploy/README.md) — copy the
+  example env/config and `docker compose up -d`.
 
-- **Simple Control Interface**: Toggle ambilight on/off with intuitive buttons
-- **Visual Feedback**: Dynamic gradient background when ambilight is active
-- **Secure Pairing**: Complete TV pairing workflow with PIN-based authentication
-- **Settings Management**: Configure TV connection and reset pairing as needed
-- **Real-time State**: Automatically syncs with current TV ambilight status
+## Use case: Apple Home, controlled from the Apple TV
 
-## Screenshots
+The intended real-world setup exposes the TV's ambilight to **HomeKit** so it can
+be toggled from the **Home app, Siri, Apple Watch, Control Center, and
+Shortcuts** — with the **Apple TV acting as the home hub**. The control chain is:
 
-The app features a clean interface with:
-- Main control buttons for On/Off switching
-- Settings gear icon for configuration
-- Colorful gradient background when ambilight is enabled
-- Configuration prompts for first-time setup
-
-## Requirements
-
-- **Platform**: tvOS 17.5+
-- **Development**: Xcode with Swift 5+
-- **Hardware**: Philips TV with ambilight support and network connectivity
-
-## Installation
-
-### For Development
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pod install
-   ```
-3. Open `ambilighthue.xcworkspace` in Xcode
-4. Build and run on tvOS Simulator or Apple TV device
-
-### For Users
-
-1. Install the app on your Apple TV
-2. Launch the app
-3. Follow the pairing setup to connect to your Philips TV
-4. Enter the PIN displayed on your TV screen
-5. Start controlling your ambilight!
-
-## Setup & Pairing
-
-The app uses Philips TV's built-in API for secure communication:
-
-1. **Initial Setup**: App prompts for TV configuration on first launch
-2. **TV Discovery**: Enter your TV's IP address in settings
-3. **Pairing Request**: App sends pairing request to TV
-4. **PIN Entry**: Enter the 4-digit PIN shown on your TV screen
-5. **Authentication**: App securely stores credentials for future use
-
-## Technical Details
-
-- **Architecture**: SwiftUI with protocol-based design for testability
-- **Networking**: Alamofire for HTTP communication with TV API
-- **Security**: Digest authentication with custom SSL trust management
-- **Storage**: UserDefaults for persistent TV configuration
-- **Testing**: Comprehensive unit tests with HTTP mocking
-
-## API Integration
-
-The app communicates with Philips TV API endpoints:
-- `/6/pair/request` - Initiate pairing process
-- `/6/pair/grant` - Complete pairing with PIN
-- `/6/HueLamp/power` - Control ambilight state (GET/POST)
-
-## Development
-
-### Building
-```bash
-xcodebuild -workspace ambilighthue.xcworkspace -scheme ambilighthue -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)'
+```
+webapp REST API  →  Homebridge (homebridge-http-switch plugin)  →  HomeKit
+                                                                      │
+                          Apple TV (home hub) ── Home app / Siri / Watch / Shortcuts
 ```
 
-### Testing
-```bash
-xcodebuild test -workspace ambilighthue.xcworkspace -scheme ambilighthue -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)'
-```
+Homebridge calls the webapp directly over the internal Docker network
+(`http://webapp:8080/api/{on,off,state}`) and publishes it as a HomeKit switch;
+Caddy fronts the human/Shortcuts-facing UI with TLS. The **canonical, ready-to-run
+example of this whole stack lives in [`deploy/`](deploy/)** — see
+[`deploy/README.md`](deploy/README.md) for bring-up, pairing, adding the switch to
+the Home app, and Shortcuts examples.
 
-### Dependencies
-- **Alamofire**: HTTP networking
-- **ViewInspector**: SwiftUI testing (test target only)
+## Archived native apps
 
-## Troubleshooting
-
-**App shows "TV not configured"**
-- Ensure your Philips TV is on the same network
-- Check TV's IP address in network settings
-- Verify TV supports API access (newer models)
-
-**Pairing fails**
-- Make sure TV displays the PIN prompt
-- Enter PIN quickly (60-second timeout)
-- Restart both app and TV if needed
-
-**Controls don't work**
-- Check network connectivity
-- Try resetting pairing in settings
-- Verify ambilight is enabled in TV settings
-
-## Contributing
-
-The project uses:
-- Protocol-based architecture for clean separation of concerns
-- Comprehensive unit testing with mocking
-- SwiftUI best practices for tvOS development
+The original tvOS SwiftUI app and its universal Apple port (iOS/iPadOS/watchOS,
+built on the shared `AmbilightCore` Swift package) are preserved under
+[`archive/`](archive/) but are **no longer maintained** — the web app supersedes
+them. Their setup, pairing flow, and strategy/porting notes are documented in
+[`archive/README.md`](archive/README.md).
 
 ## License
 
