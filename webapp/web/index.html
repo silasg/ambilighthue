@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111317" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Ambilight" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Ambilight Hue</title>
+</head>
+<body>
+  <main class="app">
+    <h1>Ambilight Hue</h1>
+
+    <section class="status" id="status-card">
+      <div class="state" id="state-dot" data-power="unknown"></div>
+      <div class="state-text" id="state-text">Loading…</div>
+    </section>
+
+    <section class="controls" id="controls" hidden>
+      <button class="btn on" id="btn-on">On</button>
+      <button class="btn off" id="btn-off">Off</button>
+    </section>
+
+    <section class="notice" id="not-configured" hidden>
+      <p>No TV paired yet. Open settings to pair.</p>
+    </section>
+
+    <button class="link" id="toggle-settings">Settings &amp; Pairing</button>
+
+    <section class="settings" id="settings" hidden>
+      <h2>Pairing</h2>
+      <label>TV IP address
+        <input type="text" id="tv-ip" placeholder="192.168.1.x" inputmode="decimal" autocomplete="off" />
+      </label>
+      <button class="btn" id="btn-start">Start pairing</button>
+
+      <label>PIN (shown on TV)
+        <input type="text" id="pin" placeholder="1234" inputmode="numeric" autocomplete="off" />
+      </label>
+      <button class="btn" id="btn-confirm">Confirm PIN</button>
+
+      <button class="btn danger" id="btn-reset">Reset pairing</button>
+
+      <details>
+        <summary>API token (optional)</summary>
+        <label>Stored locally; sent as <code>X-API-Token</code>.
+          <input type="password" id="api-token" placeholder="leave empty if unset" autocomplete="off" />
+        </label>
+      </details>
+    </section>
+
+    <p class="log" id="log"></p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

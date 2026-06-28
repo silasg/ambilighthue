@@ -1,0 +1,5 @@
+# Runtime / local artifacts
+/data/
+config.json
+*.test
+ambilighthue-web

@@ -1,0 +1,24 @@
+[tools]
+go = "1.26.4"
+
+# Tasks operate on the Go web-app port under webapp/.
+[tasks.build]
+description = "Build the Go web app"
+dir = "webapp"
+run = "go build ./..."
+
+[tasks.test]
+description = "Run the Go test suite"
+dir = "webapp"
+run = "go test ./..."
+
+[tasks.run]
+description = "Run the web app locally (PORT=8080, CONFIG_PATH=./data/config.json)"
+dir = "webapp"
+env = { PORT = "8080", CONFIG_PATH = "./data/config.json" }
+run = "go run ."
+
+[tasks.docker-build]
+description = "Build the container image (requires Docker)"
+dir = "webapp"
+run = "docker build -t ambilighthue-web ."

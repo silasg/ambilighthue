@@ -1,0 +1,26 @@
+# Keep the build context tiny.
+*.md
+README.md
+Dockerfile
+.dockerignore
+
+# Repo-level / IDE / tooling cruft (in case context is the repo root)
+.git
+.gitignore
+.claude
+docs
+
+# Xcode project (the Swift app) — never needed for the Go build
+ambilighthue
+ambilighthueTests
+*.xcodeproj
+*.xcworkspace
+Pods
+Podfile
+Podfile.lock
+icon
+
+# Local test artifacts
+*.test
+/data
+config.json
