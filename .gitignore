@@ -1,6 +1,6 @@
-Pods/
-ambilighthue.xcworkspace/
+archive/Pods/
+archive/ambilighthue.xcworkspace/
+archive/build/
 .chroma/
 .vscode/
-build/
 .claude/
