@@ -26,9 +26,10 @@ run = "docker build -t ambilighthue-web ."
 
 [tasks.release]
 description = "Cut a release: bump the latest semver git tag (patch|minor|major) with svu and push it. Pushing the tag triggers the webapp-docker workflow."
+usage = 'arg "bump" help="patch | minor | major"'
 run = '''
 set -euo pipefail
-next="$(svu {{arg(name="bump")}})"
+next="$(svu "$usage_bump")"
 echo "Tagging $next"
 git tag -a "$next" -m "release $next"
 git push origin "$next"
