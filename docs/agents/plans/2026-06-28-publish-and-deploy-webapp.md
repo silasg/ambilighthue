@@ -286,21 +286,21 @@ Provide a ready-to-run homelab stack: webapp + Homebridge + Caddy.
 
 ### Changes Required:
 
-#### [ ] 1. Compose stack
+#### [x] 1. Compose stack
 **File**: `deploy/docker-compose.yml` — `webapp` (GHCR image, `pull_policy: always`, env `BASE_PATH`/`CONFIG_PATH`/`API_TOKEN`, volume for `/data`), `homebridge`, `caddy`; one network.
 
-#### [ ] 2. Caddy config
+#### [x] 2. Caddy config
 **File**: `deploy/Caddyfile` — TLS + `handle /ambilight/* { reverse_proxy webapp:8080 { header_up X-Forwarded-Prefix /ambilight } }`.
 
-#### [ ] 3. Homebridge example
+#### [x] 3. Homebridge example
 **File**: `deploy/homebridge/config.example.json` — `homebridge-http-switch` accessory pointing at `http://webapp:8080/api/{on,off,state}` (+ `X-API-Token`), with status polling.
 
-#### [ ] 4. Env example + README
+#### [x] 4. Env example + README
 **Files**: `deploy/.env.example`, `deploy/README.md` (bring-up steps, GHCR pull, HomeKit add-to-Home, Shortcuts examples).
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] `docker compose -f deploy/docker-compose.yml config` parses (if Docker available; else `caddy validate`/JSON lint where possible)
+- [x] Docker unavailable here; instead: compose YAML parses (PyYAML — 3 services), Homebridge `config.example.json` passes `json.tool`, Caddyfile/compose/README agree on the `/ambilight` BASE_PATH approach
 #### Manual Verification:
 - [ ] On the homelab: stack comes up, ambilight appears in Home app via Homebridge, on/off works
 
