@@ -316,13 +316,13 @@ GitHub Actions builds a multi-arch image on `webapp/**` changes and pushes to GH
 
 ### Changes Required:
 
-#### [ ] 1. Workflow
+#### [x] 1. Workflow
 **File**: `.github/workflows/webapp-docker.yml`
 **Changes**: triggers `push` to `main` with `paths: [webapp/**]`, `v*` tags, `workflow_dispatch`; `permissions: { contents: read, packages: write }`; QEMU + buildx; `docker/login-action` to `ghcr.io` with `GITHUB_TOKEN`; `docker/metadata-action` (`latest`, `sha-`, semver); `docker/build-push-action` context `webapp/`, `platforms: linux/amd64,linux/arm64`.
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] `actionlint .github/workflows/webapp-docker.yml` passes (if available) or YAML lints
+- [x] `actionlint .github/workflows/webapp-docker.yml` passes (exit 0, no findings); YAML parses
 #### Manual Verification:
 - [ ] After first push, the workflow succeeds and a multi-arch image appears at `ghcr.io/<owner>/ambilighthue/webapp`
 - [ ] GHCR package set to public
