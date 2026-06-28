@@ -41,6 +41,8 @@
 		772E1536E5DDA402B6FC04F0 /* Pods-ambilighthue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ambilighthue.release.xcconfig"; path = "Target Support Files/Pods-ambilighthue/Pods-ambilighthue.release.xcconfig"; sourceTree = "<group>"; };
 		9102F8572D23F966006555CF /* AmbilightHueControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightHueControlViewTests.swift; sourceTree = "<group>"; };
 		9102F8592D241A26006555CF /* AmbilightTvStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmbilightTvStub.swift; sourceTree = "<group>"; };
+		9104DE202E2501250067F476 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
+		9104DE212E2501250067F476 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9105693D2D7C4BF2003FCA1D /* SessionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFactory.swift; sourceTree = "<group>"; };
 		9159459A2C28372D003D2AC0 /* ambilighthue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ambilighthue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9159459D2C28372D003D2AC0 /* ambilightHueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ambilightHueApp.swift; sourceTree = "<group>"; };
@@ -94,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				91F63C382C2EE2EF009BBBE3 /* todo.md */,
+				9104DE202E2501250067F476 /* CLAUDE.md */,
+				9104DE212E2501250067F476 /* README.md */,
 				9159459C2C28372D003D2AC0 /* ambilighthue */,
 				915945AD2C28372E003D2AC0 /* ambilighthueTests */,
 				9159459B2C28372D003D2AC0 /* Products */,
@@ -290,9 +294,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthueTests/Pods-ambilighthueTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -329,9 +337,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ambilighthue/Pods-ambilighthue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
