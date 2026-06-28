@@ -1,5 +1,6 @@
 [tools]
 go = "1.26.4"
+svu = "latest"   # semantic-version util, used by the `release` task
 
 # Tasks operate on the Go web-app port under webapp/.
 [tasks.build]
@@ -22,3 +23,14 @@ run = "go run ."
 description = "Build the container image (requires Docker)"
 dir = "webapp"
 run = "docker build -t ambilighthue-web ."
+
+[tasks.release]
+description = "Cut a release: bump the latest semver git tag (patch|minor|major) with svu and push it. Pushing the tag triggers the webapp-docker workflow."
+run = '''
+set -euo pipefail
+next="$(svu {{arg(name="bump")}})"
+echo "Tagging $next"
+git tag -a "$next" -m "release $next"
+git push origin "$next"
+echo "Pushed $next -> webapp-docker will publish ghcr.io/.../webapp:${next#v} (+ latest, sha-)"
+'''

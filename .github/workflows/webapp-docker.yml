@@ -3,21 +3,17 @@ name: webapp-docker
 # Build and publish the multi-arch web-app image to GHCR.
 #
 # Triggers:
-#   * push to main that touches webapp/** (or this workflow) -> publishes :latest + :sha-<sha>
-#   * push of a vX.Y.Z tag                                   -> publishes semver tags
-#   * manual run                                             -> on-demand build
+#   * push to main          -> publishes :latest + :sha-<sha>
+#   * push of a vX.Y.Z tag  -> publishes semver tags (cut these with `mise run release`)
+#   * manual run            -> on-demand build
 #
-# Note: GitHub applies the `paths` filter to every push event including tags.
-# A version tag is normally cut from a main commit that just changed webapp/**,
-# so it passes; if you ever tag a commit with no webapp/** change, use the
-# manual "Run workflow" button instead.
+# No `paths` filter on purpose: GitHub applies `paths` to tag pushes too, so a
+# release tag cut from a commit that didn't touch webapp/** would silently not
+# build. Rebuilds on every main push instead — cheap thanks to the gha cache.
 on:
   push:
     branches: [main]
     tags: ['v*']
-    paths:
-      - 'webapp/**'
-      - '.github/workflows/webapp-docker.yml'
   workflow_dispatch:
 
 permissions:
