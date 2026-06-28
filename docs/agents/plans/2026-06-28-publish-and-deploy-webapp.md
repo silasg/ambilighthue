@@ -214,7 +214,7 @@ Reconcile the `main`/`experiments` divergence and fold both ports into `main` as
 
 ### Changes Required:
 
-#### [ ] 1. Merge the divergent line + ports into `main`
+#### [x] 1. Merge the divergent line + ports into `main`
 **Recommended strategy** (preserves all commits):
 ```bash
 git switch main
@@ -224,23 +224,23 @@ git merge port/ios         # AmbilightCore/ + Platforms/ + IOS_PORTING.md
 ```
 Expect clean merges (disjoint dirs); resolve any `README.md`/`project.pbxproj` overlap by keeping the most complete version.
 
-#### [ ] 2. Resolve the ADR-number collision
+#### [x] 2. Resolve the ADR-number collision
 **Files**: `docs/adr/0001-*.md` (two of them) → renumber one to `0002-*.md`; fix any cross-references.
 
-#### [ ] 3. Reconcile README / docs
+#### [x] 3. Reconcile README / docs
 Merge the stash's README content (if kept) and the experiments README into one root `README.md` describing the monorepo (apps + webapp + deploy).
 
-#### [ ] 4. Confirm target layout exists
+#### [x] 4. Confirm target layout exists
 `/ambilighthue` (tvOS), `/AmbilightCore` + `/Platforms` (iOS/watchOS), `/webapp`, `/docs`, `mise.toml`. (`/deploy` and `/.github` arrive in later phases.)
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] `git switch main && git status` clean; all three apps' dirs present on `main`
-- [ ] Exactly one ADR per number under `docs/adr/`
-- [ ] `mise exec -- go test ./...` passes from `webapp/` on `main`
-- [ ] No leaked strings on `main`: the three `-S` searches still empty
+- [x] `git switch main && git status` clean; all three apps' dirs present on `main`
+- [x] Exactly one ADR per number under `docs/adr/`
+- [x] `mise exec -- go test ./...` passes from `webapp/` on `main`
+- [x] No leaked strings on `main`: the three `-S` searches still empty
 #### Manual Verification:
-- [ ] `main` is the intended monorepo state; tvOS sources untouched/intact
+- [x] `main` is the intended monorepo state; tvOS sources untouched/intact
 
 ### Execution (subagent)
 One subagent given: this phase, `docs/deployment-proposal.md` §2, and the branch facts. It performs the merges, ADR renumber, README reconcile; commits; reports conflicts it resolved.
