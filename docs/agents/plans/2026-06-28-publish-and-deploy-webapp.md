@@ -105,11 +105,11 @@ Get to a clean working tree on every branch and remove the two agent worktrees s
 
 ### Changes Required:
 
-#### [ ] 1. Ignore agent/worktree dirs
+#### [x] 1. Ignore agent/worktree dirs
 **File**: `.gitignore`
 **Changes**: Append `.claude/` so the worktrees/settings are never committed.
 
-#### [ ] 2. Commit loose work on `experiments`
+#### [x] 2. Commit loose work on `experiments`
 **Changes**: Stage the specific files (NEVER `git add -A`) and commit:
 ```bash
 git add .gitignore APPLE_TV_CONTROL_OPTIONS.md STRATEGY.md CLAUDE.md README.md docs/ ambilighthue.xcodeproj/project.pbxproj
@@ -117,19 +117,19 @@ git commit -m "docs: add control-options research, strategy, deployment plan; ig
 ```
 Note: a different `README.md` exists in the stash; reconcile in Phase 4, not here.
 
-#### [ ] 3. Remove the two agent worktrees (keep their branches)
+#### [x] 3. Remove the two agent worktrees (keep their branches)
 ```bash
 git worktree remove .claude/worktrees/agent-a3bb4874e2314b1cb --force
 git worktree remove .claude/worktrees/agent-a811ce518f153b794 --force
 git worktree prune
 ```
 
-#### [ ] 4. Delete the stale worktree-agent branches
+#### [x] 4. Delete the stale worktree-agent branches
 ```bash
 git branch -D worktree-agent-a3bb4874e2314b1cb worktree-agent-a811ce518f153b794
 ```
 
-#### [ ] 5. Drop the superseded stash (Decision A)
+#### [x] 5. Drop the superseded stash (Decision A)
 ```bash
 git stash drop stash@{0}
 ```
@@ -137,12 +137,12 @@ It's an older README draft (superseded by the root `README.md` on `experiments`)
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] `git worktree list` shows only the main working tree
-- [ ] `git branch` lists `experiments`, `main`, `port/ios`, `port/webapp` and no `worktree-agent-*`
-- [ ] `git status --short` is clean (except the intentionally-kept stash)
-- [ ] `git rev-parse port/ios port/webapp` still resolve
+- [x] `git worktree list` shows only the main working tree
+- [x] `git branch` lists `experiments`, `main`, `port/ios`, `port/webapp` and no `worktree-agent-*`
+- [x] `git status --short` is clean (except the intentionally-kept stash)
+- [x] `git rev-parse port/ios port/webapp` still resolve
 #### Manual Verification:
-- [ ] Confirm `.claude/` is gitignored and not staged
+- [x] Confirm `.claude/` is gitignored and not staged
 
 ### Execution (subagent)
 One subagent with this phase's commands + the file list. Must use explicit `git add <paths>` (per repo git rules), not `-A`.
