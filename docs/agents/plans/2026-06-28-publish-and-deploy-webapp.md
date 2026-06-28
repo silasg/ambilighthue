@@ -156,7 +156,7 @@ Purge the three strings from all reachable history across all refs. Requires Pha
 
 ### Changes Required:
 
-#### [ ] 1. Replacement spec
+#### [x] 1. Replacement spec
 **File**: `/tmp/replacements.txt`
 ```
 REDACTED==>REDACTED
@@ -164,13 +164,13 @@ REDACTED==>REDACTED
 TV_IP==>TV_IP
 ```
 
-#### [ ] 2. Run the rewrite (all refs)
+#### [x] 2. Run the rewrite (all refs)
 ```bash
 git filter-repo --replace-text /tmp/replacements.txt --force
 ```
 Note: filter-repo removes any configured remote (none yet) and rewrites the stash ref. If the kept stash is mangled, re-create it from the Phase 0 backup or accept its loss per Manual Confirmation Point A.
 
-#### [ ] 3. Verify purge across all refs
+#### [x] 3. Verify purge across all refs
 ```bash
 for s in REDACTED REDACTED TV_IP; do
   echo "== $s =="; git log --all -S"$s" --oneline; done   # each must print nothing
@@ -178,12 +178,12 @@ for s in REDACTED REDACTED TV_IP; do
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] All three `git log --all -S<string>` searches return empty
-- [ ] `git grep -n REDACTED $(git rev-list --all) -- 2>/dev/null | head` shows the redaction took effect in the historical commits
-- [ ] All kept branches still exist (`git branch` shows experiments/main/port/ios/port/webapp)
-- [ ] Repo builds/tests still pass on `port/webapp` tip: `mise exec -- go test ./...` (run from webapp dir)
+- [x] All three `git log --all -S<string>` searches return empty
+- [x] `git grep -n REDACTED $(git rev-list --all) -- 2>/dev/null | head` shows the redaction took effect in the historical commits
+- [x] All kept branches still exist (`git branch` shows experiments/main/port/ios/port/webapp)
+- [x] Repo builds/tests still pass on `port/webapp` tip: `mise exec -- go test ./...` (run from webapp dir)
 #### Manual Verification:
-- [ ] Spot-check an early commit (`git show <rewritten-early-commit>:ambilighthue/ambilightHueApp.swift`) shows `REDACTED`/`TV_IP`, not the secrets
+- [x] Spot-check an early commit shows `REDACTED`/`TV_IP`, not the secrets (verified `1096b4c:helloworld/NetworkCall.swift`)
 
 ### Execution (subagent)
 One subagent. It must re-verify the Phase 0 backup exists before running filter-repo, then run and verify. If verification fails, STOP and report — do not proceed.
