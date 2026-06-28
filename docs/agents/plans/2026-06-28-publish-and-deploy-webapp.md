@@ -254,23 +254,23 @@ Make the Go backend + PWA work behind Caddy at a sub-path (e.g. `/ambilight`). I
 
 ### Changes Required:
 
-#### [ ] 1. Base-path-aware server
+#### [x] 1. Base-path-aware server
 **Files**: `webapp/main.go`, `webapp/internal/server/*`
 **Changes**: Read `BASE_PATH` env (default `""`). Register all routes under it. Optionally honor `X-Forwarded-Prefix` from Caddy.
 
-#### [ ] 2. Inject base path into the served frontend
+#### [x] 2. Inject base path into the served frontend
 **Files**: `webapp/internal/server/*` (HTML templating/serving), `webapp/web/index.html`, `webapp/web/app.js`
 **Changes**: Emit the base path to the page (`<base href>` or `window.BASE_PATH`); `app.js` builds API URLs as `${BASE_PATH}/api/...`.
 
-#### [ ] 3. PWA scope under the base path
+#### [x] 3. PWA scope under the base path
 **Files**: `webapp/web/manifest.webmanifest` (or generated), `webapp/web/sw.js`
 **Changes**: `scope` and `start_url` = base path; serve and register `sw.js` within scope.
 
 ### Success Criteria:
 #### Automated Verification:
-- [ ] New tests written first and passing: `mise exec -- go test ./...` (cover routing with and without `BASE_PATH`, manifest scope, SW path)
-- [ ] `mise exec -- go build ./...` succeeds
-- [ ] Smoke run with `BASE_PATH=/ambilight`: `/ambilight/api/health` 200, `/ambilight/` serves the PWA, manifest `scope` = `/ambilight/`
+- [x] New tests written first and passing: `mise exec -- go test ./...` (cover routing with and without `BASE_PATH`, manifest scope, SW path)
+- [x] `mise exec -- go build ./...` succeeds
+- [x] Smoke run with `BASE_PATH=/ambilight`: `/ambilight/api/health` 200, `/ambilight/` serves the PWA, manifest `scope` = `/ambilight/` (orchestrator re-verified independently)
 #### Manual Verification:
 - [ ] PWA installs and controls state when served behind a sub-path
 
