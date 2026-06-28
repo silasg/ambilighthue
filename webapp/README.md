@@ -46,9 +46,25 @@ mise exec -- go test ./...   # from inside webapp/
 | 1  | `PORT`        | `8080`               | Listen port (plain HTTP).                                 |
 | 2  | `CONFIG_PATH` | `/data/config.json`  | Where paired credentials are persisted.                  |
 | 3  | `API_TOKEN`   | _(unset)_            | If set, all `/api/*` except `/api/health` require it.    |
+| 4  | `BASE_PATH`   | _(empty = root)_     | Sub-path to mount under, for reverse-proxy hosting.      |
 
 When `API_TOKEN` is set, send it as the `X-API-Token` header (or `?token=...`
 query param for convenience).
+
+`BASE_PATH` lets the app live under a sub-path (e.g. behind Caddy at
+`/ambilight`). It is normalized to a single leading slash with no trailing slash
+(`ambilight`, `/ambilight/` → `/ambilight`); empty keeps root behavior. With
+`BASE_PATH=/ambilight`, all routes move under it — `/ambilight/api/health`,
+`/ambilight/` serves the PWA — and the served manifest's `scope`/`start_url`
+plus the SPA's API URLs reflect the sub-path. The server expects the full prefix
+in the request path, so proxy it through without stripping. A matching Caddyfile
+(server run with `BASE_PATH=/ambilight`):
+
+```
+ambilight.example.com {
+    reverse_proxy /ambilight/* localhost:8080
+}
+```
 
 ## REST API
 

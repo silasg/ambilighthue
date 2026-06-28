@@ -24,9 +24,13 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// Base path under which the SW is registered (e.g. "/" or "/ambilight/"),
+// derived from the SW's own location so it works at root or behind a sub-path.
+const BASE = new URL("./", self.location).pathname;
+
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
-  if (url.pathname.startsWith("/api/")) {
+  if (url.pathname.startsWith(BASE + "api/") || url.pathname.startsWith("/api/")) {
     return; // never cache API calls
   }
   event.respondWith(

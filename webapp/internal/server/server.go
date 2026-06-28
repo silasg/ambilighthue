@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"io/fs"
 	"net/http"
+	"strings"
 	"sync"
 
 	"ambilighthue/webapp/internal/store"
@@ -27,6 +28,7 @@ type Server struct {
 	tv       TVClient
 	store    *store.Store
 	apiToken string
+	basePath string // normalized; "" for root, otherwise e.g. "/ambilight"
 
 	mu      sync.Mutex
 	pairing *tv.PairingInProgress // in-progress pairing, if any
@@ -36,11 +38,55 @@ type Server struct {
 
 // New constructs a Server. apiToken may be empty to disable token checks.
 func New(client TVClient, st *store.Store, apiToken string) *Server {
-	return &Server{tv: client, store: st, apiToken: apiToken}
+	return NewWithBasePath(client, st, apiToken, "")
 }
 
-// Handler returns the configured http.Handler (router + middleware).
+// NewWithBasePath constructs a Server served under a sub-path (for reverse-proxy
+// hosting). basePath is normalized: an empty value keeps root behavior, while
+// e.g. "ambilight" or "/ambilight/" both become "/ambilight".
+func NewWithBasePath(client TVClient, st *store.Store, apiToken, basePath string) *Server {
+	return &Server{tv: client, store: st, apiToken: apiToken, basePath: normalizeBasePath(basePath)}
+}
+
+// normalizeBasePath ensures a single leading slash and no trailing slash. An
+// empty (or "/") input yields "" so the app keeps serving from root unchanged.
+func normalizeBasePath(p string) string {
+	p = strings.Trim(p, "/")
+	if p == "" {
+		return ""
+	}
+	// Collapse any empty internal segments from inputs like "//a//b//".
+	parts := strings.Split(p, "/")
+	out := parts[:0]
+	for _, seg := range parts {
+		if seg != "" {
+			out = append(out, seg)
+		}
+	}
+	return "/" + strings.Join(out, "/")
+}
+
+// Handler returns the configured http.Handler (router + middleware). When a base
+// path is set, all routes are mounted under it (e.g. "/ambilight/api/health")
+// and requests to the bare base path redirect to its trailing-slash form.
 func (s *Server) Handler() http.Handler {
+	inner := s.withToken(s.routes())
+	if s.basePath == "" {
+		return inner
+	}
+
+	mux := http.NewServeMux()
+	// StripPrefix lets the inner handlers keep using root-relative paths
+	// ("/api/...", "/") regardless of where the app is mounted.
+	mux.Handle(s.basePath+"/", http.StripPrefix(s.basePath, inner))
+	// Redirect the bare prefix ("/ambilight") to its directory form.
+	mux.Handle(s.basePath, http.RedirectHandler(s.basePath+"/", http.StatusMovedPermanently))
+	return mux
+}
+
+// routes builds the inner router with all API and static routes at root-relative
+// paths. It is mounted at the base path (if any) by Handler.
+func (s *Server) routes() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /api/health", s.handleHealth)
@@ -52,9 +98,15 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /api/pair/confirm", s.handlePairConfirm)
 	mux.HandleFunc("POST /api/pair/reset", s.handlePairReset)
 
-	mux.Handle("/", withManifestMIME(http.FileServerFS(s.frontendFS())))
+	// Templated static assets: the manifest scope/start_url and the index's
+	// injected BASE_PATH depend on where the app is mounted.
+	mux.HandleFunc("GET /manifest.webmanifest", s.handleManifest)
+	mux.HandleFunc("GET /index.html", s.handleIndex)
+	mux.HandleFunc("GET /{$}", s.handleIndex)
 
-	return s.withToken(mux)
+	mux.Handle("/", http.FileServerFS(s.frontendFS()))
+
+	return mux
 }
 
 // withToken enforces the optional shared-secret API token on /api/* routes
@@ -80,18 +132,6 @@ func (s *Server) withToken(next http.Handler) http.Handler {
 
 func isAPI(path string) bool {
 	return len(path) >= 4 && path[:4] == "/api"
-}
-
-// withManifestMIME sets the correct MIME type for the web app manifest, which
-// the stdlib doesn't know about.
-func withManifestMIME(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if len(r.URL.Path) >= len(".webmanifest") &&
-			r.URL.Path[len(r.URL.Path)-len(".webmanifest"):] == ".webmanifest" {
-			w.Header().Set("Content-Type", "application/manifest+json")
-		}
-		next.ServeHTTP(w, r)
-	})
 }
 
 func (s *Server) handleHealth(w http.ResponseWriter, _ *http.Request) {

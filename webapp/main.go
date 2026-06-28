@@ -22,6 +22,7 @@ func main() {
 	addr := ":" + env("PORT", "8080")
 	configPath := env("CONFIG_PATH", "/data/config.json")
 	apiToken := os.Getenv("API_TOKEN")
+	basePath := os.Getenv("BASE_PATH")
 
 	sub, err := fs.Sub(webFiles, "web")
 	if err != nil {
@@ -30,7 +31,7 @@ func main() {
 	server.SetStaticFS(sub)
 
 	st := store.New(configPath)
-	srv := server.New(tv.NewClient(), st, apiToken)
+	srv := server.NewWithBasePath(tv.NewClient(), st, apiToken, basePath)
 
 	httpServer := &http.Server{
 		Addr:              addr,

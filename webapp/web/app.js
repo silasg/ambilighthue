@@ -3,6 +3,10 @@
 const $ = (id) => document.getElementById(id);
 const TOKEN_KEY = "ambilight_api_token";
 
+// Base path injected by the server (empty at root, e.g. "/ambilight" behind a
+// reverse proxy). API URLs are built as `${BASE_PATH}/api/...`.
+const BASE_PATH = (typeof window !== "undefined" && window.BASE_PATH) || "";
+
 function token() {
   return localStorage.getItem(TOKEN_KEY) || "";
 }
@@ -11,7 +15,7 @@ async function api(path, options = {}) {
   const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
   const t = token();
   if (t) headers["X-API-Token"] = t;
-  const res = await fetch(path, Object.assign({}, options, { headers }));
+  const res = await fetch(BASE_PATH + path, Object.assign({}, options, { headers }));
   let body = {};
   try { body = await res.json(); } catch (_) { /* empty body */ }
   if (!res.ok) {
@@ -108,7 +112,10 @@ function init() {
   refresh();
 
   if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js").catch(() => { /* offline shell optional */ });
+    const scope = BASE_PATH ? BASE_PATH + "/" : "/";
+    navigator.serviceWorker
+      .register(BASE_PATH + "/sw.js", { scope })
+      .catch(() => { /* offline shell optional */ });
   }
 }
 
